@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gestão de Equipe — Programadores</title>
+<style>
+  :root {
+    --bg: #ffffff; --bg2: #f5f5f3; --bg3: #eeede8;
+    --text: #1a1a18; --text2: #6b6b66; --text3: #9e9d97;
+    --border: rgba(0,0,0,0.12); --border2: rgba(0,0,0,0.22);
+    --success: #1D9E75; --danger: #A32D2D; --warn: #854F0B;
+    --info: #185FA5; --purple: #534AB7;
+    --radius: 10px; --radius-sm: 6px;
+    --shadow: 0 1px 4px rgba(0,0,0,0.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1c1a; --bg2: #252523; --bg3: #2e2e2b;
+      --text: #e8e7e0; --text2: #9e9d97; --text3: #6b6b66;
+      --border: rgba(255,255,255,0.1); --border2: rgba(255,255,255,0.2);
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; color: var(--text); background: var(--bg3); min-height: 100vh; }
+
+  /* LAYOUT */
+  .app-shell { display: flex; min-height: 100vh; }
+  .sidebar { width: 220px; background: var(--bg); border-right: 0.5px solid var(--border); padding: 1.25rem 0; position: fixed; top: 0; left: 0; height: 100vh; overflow-y: auto; z-index: 10; display: flex; flex-direction: column; }
+  .main { margin-left: 220px; padding: 1.5rem; flex: 1; }
+
+  .logo { padding: 0 1.25rem 1.25rem; border-bottom: 0.5px solid var(--border); margin-bottom: 1rem; }
+  .logo-title { font-size: 15px; font-weight: 600; color: var(--text); }
+  .logo-sub { font-size: 11px; color: var(--text2); margin-top: 2px; }
+
+  .nav-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--text3); padding: 0 1.25rem; margin: 1rem 0 4px; }
+  .nav-item { display: flex; align-items: center; gap: 8px; padding: 7px 1.25rem; font-size: 13px; color: var(--text2); cursor: pointer; border-left: 2px solid transparent; transition: all .15s; }
+  .nav-item:hover { background: var(--bg2); color: var(--text); }
+  .nav-item.active { color: var(--text); background: var(--bg2); border-left-color: var(--text); font-weight: 500; }
+  .nav-icon { width: 16px; text-align: center; font-size: 14px; }
+
+  .sidebar-footer { margin-top: auto; padding: 1rem 1.25rem 0; border-top: 0.5px solid var(--border); }
+  .sidebar-footer p { font-size: 11px; color: var(--text3); line-height: 1.5; }
+
+  /* PAGE */
+  .page { display: none; }
+  .page.active { display: block; }
+  .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 8px; }
+  .page-title { font-size: 20px; font-weight: 600; }
+  .page-sub { font-size: 12px; color: var(--text2); margin-top: 2px; }
+
+  /* CARDS */
+  .card { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 1rem 1.25rem; box-shadow: var(--shadow); }
+  .metric { background: var(--bg2); border-radius: var(--radius-sm); padding: .75rem 1rem; }
+  .metric-label { font-size: 11px; color: var(--text2); margin-bottom: 4px; }
+  .metric-val { font-size: 22px; font-weight: 600; }
+  .grid4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-bottom: 1.25rem; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1.25rem; }
+  .grid3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 1.25rem; }
+
+  /* BADGES */
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 11px; font-weight: 500; }
+  .b-ai    { background: #E1F5EE; color: #0F6E56; }
+  .b-ti    { background: #E6F1FB; color: #185FA5; }
+  .b-both  { background: #EEEDFE; color: #534AB7; }
+  .b-ok    { background: #EAF3DE; color: #3B6D11; }
+  .b-late  { background: #FCEBEB; color: #A32D2D; }
+  .b-prog  { background: #FAEEDA; color: #854F0B; }
+  .b-pend  { background: #f1efe8; color: #5f5e5a; }
+
+  /* AVATAR */
+  .avatar { width: 28px; height: 28px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; flex-shrink: 0; }
+
+  /* PROGRESS */
+  .pbar { height: 6px; background: var(--bg3); border-radius: 3px; overflow: hidden; }
+  .pbar-fill { height: 100%; border-radius: 3px; }
+
+  /* BUTTONS */
+  .btn { padding: 7px 14px; border-radius: var(--radius-sm); font-size: 13px; cursor: pointer; border: 0.5px solid var(--border2); background: var(--bg); color: var(--text); transition: all .15s; font-family: inherit; }
+  .btn:hover { background: var(--bg2); }
+  .btn-primary { background: var(--text); color: var(--bg); border-color: var(--text); }
+  .btn-primary:hover { opacity: .85; }
+  .btn-sm { padding: 4px 8px; font-size: 12px; }
+  .btn-danger { color: var(--danger); border-color: var(--danger); }
+
+  /* TABLE */
+  .tbl-wrap { border: 0.5px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 1.25rem; background: var(--bg); box-shadow: var(--shadow); }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { text-align: left; font-weight: 500; font-size: 11px; color: var(--text2); padding: 8px 10px; border-bottom: 0.5px solid var(--border); background: var(--bg2); white-space: nowrap; }
+  td { padding: 9px 10px; border-bottom: 0.5px solid var(--border); vertical-align: middle; line-height: 1.4; }
+  tr:last-child td { border-bottom: none; }
+  tbody tr:hover td { background: var(--bg2); }
+
+  /* FILTERS */
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.25rem; align-items: flex-end; }
+  .fgroup { display: flex; flex-direction: column; gap: 3px; }
+  .fgroup label { font-size: 11px; color: var(--text2); }
+  .fgroup select, .fgroup input { font-size: 13px; padding: 6px 10px; border: 0.5px solid var(--border2); border-radius: var(--radius-sm); background: var(--bg); color: var(--text); cursor: pointer; font-family: inherit; }
+  .fgroup select:focus, .fgroup input:focus { outline: 2px solid var(--info); outline-offset: 1px; }
+
+  /* FORMS */
+  .form-grid { display: grid; gap: 10px; }
+  .form-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .form-row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .field label { font-size: 12px; color: var(--text2); display: block; margin-bottom: 4px; }
+  .field input, .field select, .field textarea { width: 100%; font-size: 13px; padding: 8px 10px; border: 0.5px solid var(--border2); border-radius: var(--radius-sm); background: var(--bg); color: var(--text); font-family: inherit; }
+  .field input:focus, .field select:focus { outline: 2px solid var(--info); outline-offset: 1px; }
+
+  /* MODAL */
+  .modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.4); z-index: 100; align-items: center; justify-content: center; padding: 1rem; }
+  .modal-bg.open { display: flex; }
+  .modal { background: var(--bg); border-radius: var(--radius); padding: 1.5rem; width: 100%; max-width: 540px; max-height: 90vh; overflow-y: auto; box-shadow: 0 8px 32px rgba(0,0,0,.18); border: 0.5px solid var(--border2); }
+  .modal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; }
+  .modal-title { font-size: 15px; font-weight: 600; }
+  .modal-close { background: none; border: none; font-size: 18px; cursor: pointer; color: var(--text2); padding: 2px 6px; border-radius: 4px; }
+  .modal-close:hover { background: var(--bg2); color: var(--text); }
+  .modal-footer { display: flex; justify-content: flex-end; gap: 8px; margin-top: 1rem; padding-top: 1rem; border-top: 0.5px solid var(--border); }
+
+  /* PROJECT CARD */
+  .proj-card { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 1rem 1.25rem; margin-bottom: 10px; box-shadow: var(--shadow); }
+  .proj-card:hover { border-color: var(--border2); }
+
+  /* FORECAST */
+  .fc-row { display: flex; align-items: center; gap: 10px; margin-bottom: 7px; }
+  .fc-lbl { font-size: 12px; width: 150px; flex-shrink: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .fc-bar { flex: 1; height: 18px; background: var(--bg3); border-radius: 4px; overflow: hidden; }
+  .fc-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; padding-left: 6px; font-size: 11px; font-weight: 500; transition: width .4s; min-width: 0; }
+  .fc-planned { background: #B5D4F4; color: #185FA5; }
+  .fc-done    { background: #C0DD97; color: #3B6D11; }
+  .fc-late    { background: #F7C1C1; color: #A32D2D; }
+  .fc-nums { font-size: 12px; color: var(--text2); width: 80px; text-align: right; flex-shrink: 0; }
+
+  /* TEAM CARD */
+  .team-card { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 1.25rem; box-shadow: var(--shadow); }
+
+  /* ALERTS */
+  .alert { padding: 8px 12px; border-radius: var(--radius-sm); font-size: 12px; margin-bottom: 10px; }
+  .alert-warn   { background: #FAEEDA; color: #854F0B; }
+  .alert-ok     { background: #EAF3DE; color: #3B6D11; }
+  .alert-danger { background: #FCEBEB; color: #A32D2D; }
+
+  .empty { text-align: center; padding: 2rem; color: var(--text2); font-size: 13px; }
+  .divider { border: none; border-top: 0.5px solid var(--border); margin: 1rem 0; }
+  .row-actions { display: flex; gap: 4px; }
+  .chip { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 20px; font-size: 11px; background: var(--bg2); border: 0.5px solid var(--border); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .sidebar { width: 180px; }
+    .main { margin-left: 180px; padding: 1rem; }
+    .grid4 { grid-template-columns: repeat(2,1fr); }
+    .grid2 { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .sidebar { display: none; }
+    .main { margin-left: 0; }
+    .grid4 { grid-template-columns: repeat(2,1fr); }
+    .form-row2, .form-row3 { grid-template-columns: 1fr; }
+  }
+
+  /* PRINT */
+  @media print {
+    .sidebar { display: none; }
+    .main { margin-left: 0; }
+    .btn, .filters, .row-actions, .modal-bg { display: none !important; }
+    .page { display: block !important; page-break-after: always; }
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<div class="app-shell">
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="logo">
+    <div class="logo-title">⚙ GestãoTeam</div>
+    <div class="logo-sub">Controle de Atividades</div>
+  </div>
+  <span class="nav-label">Visão Geral</span>
+  <div class="nav-item active" onclick="setPage('dashboard')"><span class="nav-icon">📊</span>Dashboard</div>
+  <span class="nav-label">Gestão</span>
+  <div class="nav-item" onclick="setPage('atividades')"><span class="nav-icon">📋</span>Atividades</div>
+  <div class="nav-item" onclick="setPage('projetos')"><span class="nav-icon">🗂</span>Projetos</div>
+  <div class="nav-item" onclick="setPage('previsao')"><span class="nav-icon">📈</span>Projeção de Tempo</div>
+  <span class="nav-label">Equipe</span>
+  <div class="nav-item" onclick="setPage('equipe')"><span class="nav-icon">👥</span>Programadores</div>
+  <div class="nav-item" onclick="setPage('config')"><span class="nav-icon">⚙</span>Configurações</div>
+  <div class="sidebar-footer">
+    <p>Dados salvos localmente no navegador.<br>Use Chrome ou Edge para melhor experiência.</p>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="main">
+
+<!-- ===== DASHBOARD ===== -->
+<div id="p-dashboard" class="page active">
+  <div class="page-header">
+    <div>
+      <div class="page-title">Dashboard</div>
+      <div class="page-sub" id="dash-date"></div>
+    </div>
+    <button class="btn btn-primary" onclick="openModal('add')">+ Nova Atividade</button>
+  </div>
+  <div class="grid4">
+    <div class="metric"><div class="metric-label">Total de Atividades</div><div class="metric-val" id="m-total">0</div></div>
+    <div class="metric"><div class="metric-label">Em Andamento</div><div class="metric-val" id="m-prog" style="color:var(--warn)">0</div></div>
+    <div class="metric"><div class="metric-label">Concluídas</div><div class="metric-val" id="m-done" style="color:var(--success)">0</div></div>
+    <div class="metric"><div class="metric-label">Atrasadas</div><div class="metric-val" id="m-late" style="color:var(--danger)">0</div></div>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <div style="font-size:13px;font-weight:600;margin-bottom:12px;">Carga por Programador</div>
+      <div id="d-carga"></div>
+    </div>
+    <div class="card">
+      <div style="font-size:13px;font-weight:600;margin-bottom:12px;">Progresso dos Projetos</div>
+      <div id="d-proj"></div>
+    </div>
+  </div>
+  <div class="card">
+    <div style="font-size:13px;font-weight:600;margin-bottom:12px;">🔔 Próximas Entregas</div>
+    <div id="d-proximas"></div>
+  </div>
+</div>
+
+<!-- ===== ATIVIDADES ===== -->
+<div id="p-atividades" class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">Atividades</div>
+      <div class="page-sub" id="ativ-count"></div>
+    </div>
+    <button class="btn btn-primary" onclick="openModal('add')">+ Nova Atividade</button>
+  </div>
+  <div class="filters">
+    <div class="fgroup"><label>Programador</label><select id="f-prog" onchange="renderAtividades()"><option value="">Todos</option></select></div>
+    <div class="fgroup"><label>Cliente</label><select id="f-cli" onchange="renderAtividades()"><option value="">Todos</option></select></div>
+    <div class="fgroup"><label>Projeto</label><select id="f-proj" onchange="renderAtividades()"><option value="">Todos</option></select></div>
+    <div class="fgroup"><label>Status</label>
+      <select id="f-status" onchange="renderAtividades()">
+        <option value="">Todos</option><option>Pendente</option><option>Em Andamento</option><option>Concluída</option><option>Atrasada</option>
+      </select>
+    </div>
+    <div class="fgroup"><label>Período — De</label><input type="date" id="f-de" onchange="renderAtividades()"></div>
+    <div class="fgroup"><label>Até</label><input type="date" id="f-ate" onchange="renderAtividades()"></div>
+    <div class="fgroup" style="justify-content:flex-end"><label>&nbsp;</label><button class="btn btn-sm" onclick="limparFiltros()">Limpar</button></div>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr>
+        <th>Atividade</th><th>Programador</th><th>Projeto / Cliente</th>
+        <th>Início Prev.</th><th>Fim Prev.</th><th>H. Previstas</th><th>H. Realizadas</th><th>Status</th><th style="width:80px">Ações</th>
+      </tr></thead>
+      <tbody id="tbl-ativ"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ===== PROJETOS ===== -->
+<div id="p-projetos" class="page">
+  <div class="page-header">
+    <div><div class="page-title">Projetos</div></div>
+    <button class="btn btn-primary" onclick="openModal('add-proj')">+ Novo Projeto</button>
+  </div>
+  <div class="filters">
+    <div class="fgroup"><label>Cliente</label><select id="fp-cli" onchange="renderProjetos()"><option value="">Todos</option></select></div>
+    <div class="fgroup"><label>Área</label>
+      <select id="fp-area" onchange="renderProjetos()">
+        <option value="">Todas</option><option>Automação Industrial</option><option>TI</option>
+      </select>
+    </div>
+  </div>
+  <div id="lista-projetos"></div>
+</div>
+
+<!-- ===== PROJEÇÃO ===== -->
+<div id="p-previsao" class="page">
+  <div class="page-header">
+    <div><div class="page-title">Projeção de Tempo</div><div class="page-sub">Análise previsto vs. realizado por projeto</div></div>
+  </div>
+  <div class="filters">
+    <div class="fgroup"><label>Projeto</label><select id="fv-proj" onchange="renderPrevisao()"><option value="">Todos</option></select></div>
+  </div>
+  <div id="lista-previsao"></div>
+</div>
+
+<!-- ===== EQUIPE ===== -->
+<div id="p-equipe" class="page">
+  <div class="page-header">
+    <div><div class="page-title">Programadores</div><div class="page-sub">6 profissionais</div></div>
+  </div>
+  <div id="lista-equipe" class="grid2"></div>
+</div>
+
+<!-- ===== CONFIGURAÇÕES ===== -->
+<div id="p-config" class="page">
+  <div class="page-header">
+    <div><div class="page-title">Configurações</div></div>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <div style="font-size:13px;font-weight:600;margin-bottom:12px;">Programadores</div>
+      <div id="cfg-progs"></div>
+      <hr class="divider">
+      <button class="btn btn-sm btn-primary" onclick="openModal('add-prog')">+ Novo Programador</button>
+    </div>
+    <div class="card">
+      <div style="font-size:13px;font-weight:600;margin-bottom:12px;">Clientes</div>
+      <div id="cfg-clis"></div>
+      <hr class="divider">
+      <button class="btn btn-sm btn-primary" onclick="openModal('add-cli')">+ Novo Cliente</button>
+    </div>
+  </div>
+  <div class="card" style="margin-top:0">
+    <div style="font-size:13px;font-weight:600;margin-bottom:8px;">Dados do Sistema</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <button class="btn btn-sm" onclick="exportarDados()">📤 Exportar JSON</button>
+      <label class="btn btn-sm" style="cursor:pointer">📥 Importar JSON<input type="file" accept=".json" style="display:none" onchange="importarDados(event)"></label>
+      <button class="btn btn-sm btn-danger" onclick="if(confirm('Apagar todos os dados?')) { localStorage.clear(); location.reload(); }">🗑 Limpar Tudo</button>
+    </div>
+  </div>
+</div>
+
+</main>
+</div>
+
+<!-- ===== MODAIS ===== -->
+
+<!-- NOVA / EDITAR ATIVIDADE -->
+<div id="modal-add" class="modal-bg">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-title" id="modal-add-title">Nova Atividade</div>
+      <button class="modal-close" onclick="closeModal('add')">✕</button>
+    </div>
+    <div class="form-grid">
+      <input type="hidden" id="f-id">
+      <div class="field"><label>Descrição *</label><input type="text" id="f-desc" placeholder="Ex: Programação CLP S7-1200"></div>
+      <div class="form-row2">
+        <div class="field"><label>Programador *</label><select id="f-prog-sel"><option value="">Selecione</option></select></div>
+        <div class="field"><label>Projeto *</label><select id="f-proj-sel"><option value="">Selecione</option></select></div>
+      </div>
+      <div class="form-row3">
+        <div class="field"><label>Início Previsto</label><input type="date" id="f-inicio"></div>
+        <div class="field"><label>Fim Previsto</label><input type="date" id="f-fim"></div>
+        <div class="field"><label>Horas Previstas</label><input type="number" id="f-hprev" min="0" placeholder="0"></div>
+      </div>
+      <div class="form-row2">
+        <div class="field"><label>Horas Realizadas</label><input type="number" id="f-hreal" min="0" placeholder="0"></div>
+        <div class="field"><label>Status</label>
+          <select id="f-st">
+            <option>Pendente</option><option>Em Andamento</option><option>Concluída</option><option>Atrasada</option>
+          </select>
+        </div>
+      </div>
+      <div class="field"><label>Observações</label><textarea id="f-obs" rows="2" style="width:100%;font-size:13px;padding:8px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);font-family:inherit;resize:vertical"></textarea></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" onclick="closeModal('add')">Cancelar</button>
+      <button class="btn btn-primary" onclick="salvarAtividade()">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<!-- NOVO PROJETO -->
+<div id="modal-add-proj" class="modal-bg">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-title" id="modal-proj-title">Novo Projeto</div>
+      <button class="modal-close" onclick="closeModal('add-proj')">✕</button>
+    </div>
+    <div class="form-grid">
+      <input type="hidden" id="fp-id">
+      <div class="field"><label>Nome do Projeto *</label><input type="text" id="fp-nome" placeholder="Ex: Automação Linha 4"></div>
+      <div class="form-row2">
+        <div class="field"><label>Cliente *</label><select id="fp-cli-sel"><option value="">Selecione</option></select></div>
+        <div class="field"><label>Área *</label>
+          <select id="fp-area-sel"><option value="">Selecione</option><option>Automação Industrial</option><option>TI</option></select>
+        </div>
+      </div>
+      <div class="field"><label>Programadores Alocados</label>
+        <div id="fp-progs-checks" style="display:flex;flex-wrap:wrap;gap:8px;padding:8px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);background:var(--bg2)"></div>
+      </div>
+      <div class="form-row2">
+        <div class="field"><label>Data de Início</label><input type="date" id="fp-inicio"></div>
+        <div class="field"><label>Prazo Final</label><input type="date" id="fp-prazo"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" onclick="closeModal('add-proj')">Cancelar</button>
+      <button class="btn btn-primary" onclick="salvarProjeto()">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<!-- NOVO PROGRAMADOR -->
+<div id="modal-add-prog" class="modal-bg">
+  <div class="modal" style="max-width:400px">
+    <div class="modal-head">
+      <div class="modal-title">Novo Programador</div>
+      <button class="modal-close" onclick="closeModal('add-prog')">✕</button>
+    </div>
+    <div class="form-grid">
+      <div class="field"><label>Nome Completo *</label><input type="text" id="np-nome" placeholder="Ex: João Souza"></div>
+      <div class="field"><label>Área de Atuação *</label>
+        <select id="np-area">
+          <option value="ai">Automação Industrial</option>
+          <option value="ti">TI</option>
+          <option value="both">Automação Industrial + TI</option>
+        </select>
+      </div>
+      <div class="field"><label>Cor do Avatar</label><input type="color" id="np-cor" value="#B5D4F4" style="height:36px;padding:2px;cursor:pointer"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" onclick="closeModal('add-prog')">Cancelar</button>
+      <button class="btn btn-primary" onclick="salvarProgramador()">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<!-- NOVO CLIENTE -->
+<div id="modal-add-cli" class="modal-bg">
+  <div class="modal" style="max-width:400px">
+    <div class="modal-head">
+      <div class="modal-title">Novo Cliente</div>
+      <button class="modal-close" onclick="closeModal('add-cli')">✕</button>
+    </div>
+    <div class="form-grid">
+      <div class="field"><label>Nome do Cliente *</label><input type="text" id="nc-nome" placeholder="Ex: Empresa XYZ Ltda"></div>
+      <div class="field"><label>Setor</label><input type="text" id="nc-setor" placeholder="Ex: Metalurgia, Alimentos..."></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" onclick="closeModal('add-cli')">Cancelar</button>
+      <button class="btn btn-primary" onclick="salvarCliente()">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// =====================================================
+// DADOS INICIAIS
+// =====================================================
+const DEFAULTS = {
+  programadores: [
+    { id:'P1', nome:'Carlos Silva',    area:'ai',   iniciais:'CS', cor:'#B5D4F4' },
+    { id:'P2', nome:'Marcos Oliveira', area:'ai',   iniciais:'MO', cor:'#9FE1CB' },
+    { id:'P3', nome:'Rafael Santos',   area:'ai',   iniciais:'RS', cor:'#F5C4B3' },
+    { id:'P4', nome:'Eduardo Costa',   area:'ai',   iniciais:'EC', cor:'#FAC775' },
+    { id:'P5', nome:'Lucas Ferreira',  area:'ti',   iniciais:'LF', cor:'#CECBF6' },
+    { id:'P6', nome:'Diego Almeida',   area:'both', iniciais:'DA', cor:'#F4C0D1' },
+  ],
+  clientes: [
+    { id:'C1', nome:'Metalúrgica Aço Forte',   setor:'Metalurgia' },
+    { id:'C2', nome:'Petroquímica Nordeste',    setor:'Petroquímica' },
+    { id:'C3', nome:'Indústria Têxtil Sul',     setor:'Têxtil' },
+    { id:'C4', nome:'LogTech Soluções',         setor:'Tecnologia' },
+    { id:'C5', nome:'Alimentos Vitória',        setor:'Alimentos' },
+  ],
+  projetos: [
+    { id:'PRJ01', nome:'Automação Linha 3',   cliente:'C1', area:'Automação Industrial', prog:['P1','P2'], inicio:'2025-01-10', prazo:'2025-05-30' },
+    { id:'PRJ02', nome:'SCADA Refinaria',     cliente:'C2', area:'Automação Industrial', prog:['P3','P6'], inicio:'2025-02-01', prazo:'2025-06-15' },
+    { id:'PRJ03', nome:'Sistema MES',         cliente:'C3', area:'Automação Industrial', prog:['P4','P1'], inicio:'2025-02-15', prazo:'2025-05-20' },
+    { id:'PRJ04', nome:'ERP Integração',      cliente:'C4', area:'TI',                   prog:['P5','P6'], inicio:'2025-03-01', prazo:'2025-06-30' },
+    { id:'PRJ05', nome:'Portal do Cliente',   cliente:'C4', area:'TI',                   prog:['P5'],      inicio:'2025-03-20', prazo:'2025-05-15' },
+    { id:'PRJ06', nome:'Supervisório CLP',    cliente:'C5', area:'Automação Industrial', prog:['P2','P3'], inicio:'2025-03-10', prazo:'2025-05-10' },
+  ],
+  atividades: [
+    { id:1,  desc:'Programação CLP S7-1200',          prog:'P1', proj:'PRJ01', inicio:'2025-03-01', fim:'2025-03-20', hprev:40, hreal:38, status:'Concluída',    obs:'' },
+    { id:2,  desc:'Configuração rede Profinet',        prog:'P2', proj:'PRJ01', inicio:'2025-03-15', fim:'2025-04-05', hprev:24, hreal:20, status:'Concluída',    obs:'' },
+    { id:3,  desc:'Desenvolvimento telas SCADA',       prog:'P3', proj:'PRJ02', inicio:'2025-03-10', fim:'2025-04-15', hprev:60, hreal:55, status:'Em Andamento', obs:'' },
+    { id:4,  desc:'Integração OPC-UA refinaria',       prog:'P6', proj:'PRJ02', inicio:'2025-03-20', fim:'2025-04-30', hprev:48, hreal:30, status:'Em Andamento', obs:'' },
+    { id:5,  desc:'Módulo rastreabilidade MES',        prog:'P4', proj:'PRJ03', inicio:'2025-02-15', fim:'2025-03-30', hprev:80, hreal:95, status:'Atrasada',     obs:'Escopo expandido pelo cliente' },
+    { id:6,  desc:'Interface HMI Têxtil',              prog:'P1', proj:'PRJ03', inicio:'2025-04-01', fim:'2025-04-20', hprev:32, hreal:0,  status:'Pendente',     obs:'' },
+    { id:7,  desc:'Módulo fiscal ERP',                 prog:'P5', proj:'PRJ04', inicio:'2025-03-05', fim:'2025-04-10', hprev:56, hreal:52, status:'Em Andamento', obs:'' },
+    { id:8,  desc:'API integração WMS',                prog:'P6', proj:'PRJ04', inicio:'2025-03-25', fim:'2025-04-25', hprev:40, hreal:15, status:'Em Andamento', obs:'' },
+    { id:9,  desc:'Front-end portal fornecedores',     prog:'P5', proj:'PRJ05', inicio:'2025-04-05', fim:'2025-04-30', hprev:48, hreal:8,  status:'Em Andamento', obs:'' },
+    { id:10, desc:'Programação supervisório CLP',      prog:'P2', proj:'PRJ06', inicio:'2025-03-20', fim:'2025-04-15', hprev:36, hreal:30, status:'Em Andamento', obs:'' },
+    { id:11, desc:'Alarmes e histórico de eventos',    prog:'P3', proj:'PRJ06', inicio:'2025-04-01', fim:'2025-04-25', hprev:28, hreal:6,  status:'Em Andamento', obs:'' },
+    { id:12, desc:'Testes e comissionamento linha 3',  prog:'P2', proj:'PRJ01', inicio:'2025-04-10', fim:'2025-04-28', hprev:20, hreal:0,  status:'Pendente',     obs:'' },
+    { id:13, desc:'Documentação técnica SCADA',        prog:'P3', proj:'PRJ02', inicio:'2025-04-20', fim:'2025-05-05', hprev:16, hreal:0,  status:'Pendente',     obs:'' },
+    { id:14, desc:'Treinamento operadores refinaria',  prog:'P6', proj:'PRJ02', inicio:'2025-05-01', fim:'2025-05-10', hprev:16, hreal:0,  status:'Pendente',     obs:'' },
+  ],
+  nextId: 15,
+  nextPId: 7,
+  nextCId: 6,
+  nextPRJId: 7,
+};
+
+// =====================================================
+// ESTADO — persiste no localStorage
+// =====================================================
+function loadState() {
+  try {
+    const s = localStorage.getItem('gestao_equipe');
+    return s ? JSON.parse(s) : JSON.parse(JSON.stringify(DEFAULTS));
+  } catch(e) { return JSON.parse(JSON.stringify(DEFAULTS)); }
+}
+function saveState() {
+  localStorage.setItem('gestao_equipe', JSON.stringify(state));
+}
+
+let state = loadState();
+let { programadores, clientes, projetos, atividades } = state;
+
+// =====================================================
+// HELPERS
+// =====================================================
+const getProg = id => programadores.find(p=>p.id===id);
+const getProj = id => projetos.find(p=>p.id===id);
+const getCli  = id => clientes.find(c=>c.id===id);
+const hoje    = () => new Date().toISOString().split('T')[0];
+const fmtDate = d => d ? d.split('-').reverse().join('/') : '—';
+const initiais = n => n.split(' ').slice(0,2).map(w=>w[0]).join('').toUpperCase();
+
+function barColor(pct) {
+  if (pct >= 110) return 'var(--danger)';
+  if (pct >= 80)  return 'var(--warn)';
+  return 'var(--success)';
+}
+function statusBadge(s) {
+  const m = { 'Concluída':'b-ok','Em Andamento':'b-prog','Atrasada':'b-late','Pendente':'b-pend' };
+  return `<span class="badge ${m[s]||'b-pend'}">${s}</span>`;
+}
+function areaBadge(a) {
+  if (a==='ai') return '<span class="badge b-ai">Automação</span>';
+  if (a==='ti') return '<span class="badge b-ti">TI</span>';
+  return '<span class="badge b-both">Automação + TI</span>';
+}
+function syncState() {
+  state.programadores = programadores;
+  state.clientes      = clientes;
+  state.projetos      = projetos;
+  state.atividades    = atividades;
+  saveState();
+}
+
+// =====================================================
+// NAVEGAÇÃO
+// =====================================================
+function setPage(name) {
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById('p-'+name).classList.add('active');
+  const items = document.querySelectorAll('.nav-item');
+  const map = ['dashboard','atividades','projetos','previsao','equipe','config'];
+  const idx = map.indexOf(name);
+  if(idx>=0) items[idx].classList.add('active');
+  const renders = { dashboard:renderDashboard, atividades:renderAtividades, projetos:renderProjetos, previsao:renderPrevisao, equipe:renderEquipe, config:renderConfig };
+  renders[name]?.();
+}
+
+// =====================================================
+// SELECTS
+// =====================================================
+function populateSelects() {
+  // filtros atividades
+  setSelect('f-prog',  programadores, 'id','nome', 'Todos');
+  setSelect('f-cli',   clientes,      'id','nome', 'Todos');
+  setSelect('f-proj',  projetos,      'id','nome', 'Todos');
+  // filtros projetos
+  setSelect('fp-cli',  clientes,      'id','nome', 'Todos');
+  // filtros previsão
+  setSelect('fv-proj', projetos,      'id','nome', 'Todos');
+  // modais
+  setSelect('f-prog-sel', programadores,'id','nome','Selecione');
+  setSelect('f-proj-sel', projetos,     'id','nome','Selecione');
+  setSelect('fp-cli-sel', clientes,     'id','nome','Selecione');
+  // config checkboxes projeto
+  const chks = document.getElementById('fp-progs-checks');
+  if(chks) chks.innerHTML = programadores.map(p=>`
+    <label style="display:flex;align-items:center;gap:4px;font-size:12px;cursor:pointer">
+      <input type="checkbox" value="${p.id}" style="cursor:pointer"> ${p.nome}
+    </label>`).join('');
+}
+function setSelect(id, items, valKey, labelKey, blank) {
+  const el = document.getElementById(id);
+  if(!el) return;
+  const cur = el.value;
+  el.innerHTML = `<option value="">${blank}</option>` +
+    items.map(i=>`<option value="${i[valKey]}">${i[labelKey]}</option>`).join('');
+  if(cur) el.value = cur;
+}
+
+// =====================================================
+// MODAL
+// =====================================================
+function openModal(name, id) {
+  if(name==='add') {
+    document.getElementById('modal-add-title').textContent = id ? 'Editar Atividade' : 'Nova Atividade';
+    document.getElementById('f-id').value = id||'';
+    if(id) {
+      const a = atividades.find(x=>x.id===id);
+      document.getElementById('f-desc').value   = a.desc;
+      document.getElementById('f-prog-sel').value = a.prog;
+      document.getElementById('f-proj-sel').value = a.proj;
+      document.getElementById('f-inicio').value = a.inicio;
+      document.getElementById('f-fim').value    = a.fim;
+      document.getElementById('f-hprev').value  = a.hprev;
+      document.getElementById('f-hreal').value  = a.hreal;
+      document.getElementById('f-st').value     = a.status;
+      document.getElementById('f-obs').value    = a.obs||'';
+    } else {
+      ['f-desc','f-inicio','f-fim','f-obs'].forEach(x=>document.getElementById(x).value='');
+      ['f-prog-sel','f-proj-sel'].forEach(x=>document.getElementById(x).value='');
+      document.getElementById('f-hprev').value=0;
+      document.getElementById('f-hreal').value=0;
+      document.getElementById('f-st').value='Pendente';
+    }
+  }
+  if(name==='add-proj') {
+    document.getElementById('modal-proj-title').textContent = id ? 'Editar Projeto' : 'Novo Projeto';
+    document.getElementById('fp-id').value = id||'';
+    if(id) {
+      const p = projetos.find(x=>x.id===id);
+      document.getElementById('fp-nome').value = p.nome;
+      document.getElementById('fp-cli-sel').value = p.cliente;
+      document.getElementById('fp-area-sel').value = p.area;
+      document.getElementById('fp-inicio').value = p.inicio||'';
+      document.getElementById('fp-prazo').value  = p.prazo||'';
+      document.querySelectorAll('#fp-progs-checks input').forEach(cb=>{ cb.checked = p.prog.includes(cb.value); });
+    } else {
+      ['fp-nome','fp-inicio','fp-prazo'].forEach(x=>document.getElementById(x).value='');
+      document.getElementById('fp-cli-sel').value='';
+      document.getElementById('fp-area-sel').value='';
+      document.querySelectorAll('#fp-progs-checks input').forEach(cb=>cb.checked=false);
+    }
+  }
+  if(name==='add-prog') { document.getElementById('np-nome').value=''; document.getElementById('np-cor').value='#B5D4F4'; }
+  if(name==='add-cli')  { document.getElementById('nc-nome').value=''; document.getElementById('nc-setor').value=''; }
+  document.getElementById('modal-'+name).classList.add('open');
+}
+function closeModal(name) {
+  document.getElementById('modal-'+name).classList.remove('open');
+}
+document.querySelectorAll('.modal-bg').forEach(m=>{
+  m.addEventListener('click', e=>{ if(e.target===m) m.classList.remove('open'); });
+});
+
+// =====================================================
+// CRUD ATIVIDADE
+// =====================================================
+function salvarAtividade() {
+  const desc = document.getElementById('f-desc').value.trim();
+  const prog = document.getElementById('f-prog-sel').value;
+  const proj = document.getElementById('f-proj-sel').value;
+  if(!desc||!prog||!proj) { alert('Preencha descrição, programador e projeto.'); return; }
+  const id = document.getElementById('f-id').value;
+  const obj = {
+    desc, prog, proj,
+    inicio: document.getElementById('f-inicio').value||hoje(),
+    fim:    document.getElementById('f-fim').value||hoje(),
+    hprev:  parseInt(document.getElementById('f-hprev').value)||0,
+    hreal:  parseInt(document.getElementById('f-hreal').value)||0,
+    status: document.getElementById('f-st').value,
+    obs:    document.getElementById('f-obs').value,
+  };
+  if(id) {
+    const idx = atividades.findIndex(a=>a.id===parseInt(id));
+    if(idx>=0) atividades[idx] = {...atividades[idx], ...obj};
+  } else {
+    obj.id = state.nextId++;
+    atividades.push(obj);
+  }
+  syncState();
+  closeModal('add');
+  renderAtividades();
+  renderDashboard();
+}
+function deletarAtividade(id) {
+  if(!confirm('Remover esta atividade?')) return;
+  atividades = atividades.filter(a=>a.id!==id);
+  state.atividades = atividades;
+  syncState();
+  renderAtividades();
+  renderDashboard();
+}
+
+// =====================================================
+// CRUD PROJETO
+// =====================================================
+function salvarProjeto() {
+  const nome = document.getElementById('fp-nome').value.trim();
+  const cli  = document.getElementById('fp-cli-sel').value;
+  const area = document.getElementById('fp-area-sel').value;
+  if(!nome||!cli||!area) { alert('Preencha nome, cliente e área.'); return; }
+  const progs = [...document.querySelectorAll('#fp-progs-checks input:checked')].map(c=>c.value);
+  const id = document.getElementById('fp-id').value;
+  const obj = { nome, cliente:cli, area, prog:progs,
+    inicio: document.getElementById('fp-inicio').value,
+    prazo:  document.getElementById('fp-prazo').value };
+  if(id) {
+    const idx = projetos.findIndex(p=>p.id===id);
+    if(idx>=0) projetos[idx] = {...projetos[idx], ...obj};
+  } else {
+    obj.id = 'PRJ'+String(state.nextPRJId++).padStart(2,'0');
+    projetos.push(obj);
+  }
+  populateSelects();
+  syncState();
+  closeModal('add-proj');
+  renderProjetos();
+}
+function deletarProjeto(id) {
+  if(!confirm('Remover projeto? As atividades vinculadas não serão apagadas.')) return;
+  projetos = projetos.filter(p=>p.id!==id);
+  state.projetos = projetos;
+  syncState();
+  populateSelects();
+  renderProjetos();
+}
+
+// =====================================================
+// CRUD PROGRAMADOR
+// =====================================================
+function salvarProgramador() {
+  const nome = document.getElementById('np-nome').value.trim();
+  const area = document.getElementById('np-area').value;
+  const cor  = document.getElementById('np-cor').value;
+  if(!nome) { alert('Informe o nome.'); return; }
+  programadores.push({ id:'P'+state.nextPId++, nome, area, iniciais:initiais(nome), cor });
+  syncState();
+  populateSelects();
+  closeModal('add-prog');
+  renderConfig();
+}
+function deletarProgramador(id) {
+  if(!confirm('Remover programador?')) return;
+  programadores = programadores.filter(p=>p.id!==id);
+  state.programadores = programadores;
+  syncState();
+  populateSelects();
+  renderConfig();
+}
+
+// =====================================================
+// CRUD CLIENTE
+// =====================================================
+function salvarCliente() {
+  const nome  = document.getElementById('nc-nome').value.trim();
+  const setor = document.getElementById('nc-setor').value.trim();
+  if(!nome) { alert('Informe o nome.'); return; }
+  clientes.push({ id:'C'+state.nextCId++, nome, setor });
+  syncState();
+  populateSelects();
+  closeModal('add-cli');
+  renderConfig();
+}
+function deletarCliente(id) {
+  if(!confirm('Remover cliente?')) return;
+  clientes = clientes.filter(c=>c.id!==id);
+  state.clientes = clientes;
+  syncState();
+  populateSelects();
+  renderConfig();
+}
+
+// =====================================================
+// EXPORT / IMPORT
+// =====================================================
+function exportarDados() {
+  const blob = new Blob([JSON.stringify(state, null, 2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'gestao_equipe_backup_'+hoje()+'.json';
+  a.click();
+}
+function importarDados(e) {
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try {
+      const data = JSON.parse(ev.target.result);
+      if(!data.atividades || !data.programadores) { alert('Arquivo inválido.'); return; }
+      Object.assign(state, data);
+      programadores = state.programadores;
+      clientes      = state.clientes;
+      projetos      = state.projetos;
+      atividades    = state.atividades;
+      saveState();
+      populateSelects();
+      renderConfig();
+      alert('Dados importados com sucesso!');
+    } catch(err) { alert('Erro ao importar: '+err.message); }
+  };
+  reader.readAsText(file);
+}
+
+// =====================================================
+// DASHBOARD
+// =====================================================
+function renderDashboard() {
+  const d = new Date();
+  document.getElementById('dash-date').textContent =
+    d.toLocaleDateString('pt-BR',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+
+  document.getElementById('m-total').textContent = atividades.length;
+  document.getElementById('m-prog').textContent  = atividades.filter(a=>a.status==='Em Andamento').length;
+  document.getElementById('m-done').textContent  = atividades.filter(a=>a.status==='Concluída').length;
+  document.getElementById('m-late').textContent  = atividades.filter(a=>a.status==='Atrasada').length;
+
+  // carga
+  document.getElementById('d-carga').innerHTML = programadores.map(p=>{
+    const atv = atividades.filter(a=>a.prog===p.id && a.status!=='Concluída');
+    const hp  = atv.reduce((s,a)=>s+a.hprev,0);
+    const hr  = atv.reduce((s,a)=>s+a.hreal,0);
+    const pct = hp>0 ? Math.min(Math.round(hr/hp*100),100) : 0;
+    return `<div style="margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px;align-items:center">
+        <span style="display:flex;align-items:center;gap:6px">
+          <span class="avatar" style="background:${p.cor};color:#333;width:24px;height:24px;font-size:10px">${p.iniciais}</span>
+          <span>${p.nome}</span>${areaBadge(p.area)}
+        </span>
+        <span style="color:var(--text2)">${atv.length} atv · ${hr}/${hp}h</span>
+      </div>
+      <div class="pbar"><div class="pbar-fill" style="width:${pct}%;background:${barColor(pct)}"></div></div>
+    </div>`;
+  }).join('');
+
+  // projetos
+  document.getElementById('d-proj').innerHTML = projetos.map(prj=>{
+    const atv   = atividades.filter(a=>a.proj===prj.id);
+    const total = atv.length;
+    const done  = atv.filter(a=>a.status==='Concluída').length;
+    const pct   = total>0 ? Math.round(done/total*100) : 0;
+    return `<div style="margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px">
+        <span><strong>${prj.nome}</strong> <span style="color:var(--text2);font-size:11px">${getCli(prj.cliente)?.nome}</span></span>
+        <span style="color:var(--text2)">${done}/${total} (${pct}%)</span>
+      </div>
+      <div class="pbar"><div class="pbar-fill" style="width:${pct}%;background:${barColor(pct*1.2)}"></div></div>
+    </div>`;
+  }).join('');
+
+  // próximas
+  const sorted = [...atividades]
+    .filter(a=>a.status!=='Concluída')
+    .sort((a,b)=>a.fim.localeCompare(b.fim))
+    .slice(0,6);
+  if(!sorted.length) { document.getElementById('d-proximas').innerHTML='<div class="empty">Nenhuma entrega pendente.</div>'; return; }
+  document.getElementById('d-proximas').innerHTML =
+    `<table><thead><tr><th>Atividade</th><th>Programador</th><th>Projeto</th><th>Entrega</th><th>Status</th></tr></thead><tbody>`+
+    sorted.map(a=>{
+      const p=getProg(a.prog); const prj=getProj(a.proj);
+      const atrasado = a.fim < hoje() && a.status!=='Concluída';
+      return `<tr>
+        <td>${a.desc}</td>
+        <td style="white-space:nowrap"><span class="avatar" style="background:${p?.cor};color:#333;width:22px;height:22px;font-size:9px">${p?.iniciais}</span> ${p?.nome}</td>
+        <td>${prj?.nome}</td>
+        <td style="color:${atrasado?'var(--danger)':'var(--text)'}">${fmtDate(a.fim)}</td>
+        <td>${statusBadge(a.status)}</td>
+      </tr>`;
+    }).join('')+'</tbody></table>';
+}
+
+// =====================================================
+// ATIVIDADES
+// =====================================================
+function limparFiltros() {
+  ['f-prog','f-cli','f-proj','f-status'].forEach(id=>document.getElementById(id).value='');
+  ['f-de','f-ate'].forEach(id=>document.getElementById(id).value='');
+  renderAtividades();
+}
+function renderAtividades() {
+  const fp   = document.getElementById('f-prog').value;
+  const fc   = document.getElementById('f-cli').value;
+  const fprj = document.getElementById('f-proj').value;
+  const fs   = document.getElementById('f-status').value;
+  const fde  = document.getElementById('f-de').value;
+  const fat  = document.getElementById('f-ate').value;
+
+  let list = atividades.filter(a=>{
+    if(fp && a.prog!==fp) return false;
+    if(fprj && a.proj!==fprj) return false;
+    const prj = getProj(a.proj);
+    if(fc && prj?.cliente!==fc) return false;
+    if(fs && a.status!==fs) return false;
+    if(fde && a.fim < fde) return false;
+    if(fat && a.inicio > fat) return false;
+    return true;
+  });
+
+  document.getElementById('ativ-count').textContent = `${list.length} atividade${list.length!==1?'s':''}`;
+  const tbody = document.getElementById('tbl-ativ');
+  if(!list.length){ tbody.innerHTML=`<tr><td colspan="9" class="empty">Nenhuma atividade encontrada.</td></tr>`; return; }
+
+  tbody.innerHTML = list.map(a=>{
+    const p=getProg(a.prog); const prj=getProj(a.proj); const cli=getCli(prj?.cliente);
+    const pct = a.hprev>0 ? Math.round(a.hreal/a.hprev*100) : 0;
+    return `<tr>
+      <td title="${a.obs||''}"><strong>${a.desc}</strong>${a.obs?'<br><span style="font-size:11px;color:var(--text2)">'+a.obs+'</span>':''}</td>
+      <td style="white-space:nowrap"><span class="avatar" style="background:${p?.cor};color:#333;width:22px;height:22px;font-size:9px">${p?.iniciais}</span> ${p?.nome}</td>
+      <td><div>${prj?.nome}</div><div style="font-size:11px;color:var(--text2)">${cli?.nome}</div></td>
+      <td>${fmtDate(a.inicio)}</td>
+      <td style="color:${a.fim<hoje()&&a.status!=='Concluída'?'var(--danger)':''}">${fmtDate(a.fim)}</td>
+      <td>${a.hprev}h</td>
+      <td>
+        <div style="display:flex;align-items:center;gap:6px">
+          <span>${a.hreal}h</span>
+          <div style="width:40px"><div class="pbar"><div class="pbar-fill" style="width:${Math.min(pct,100)}%;background:${barColor(pct)}"></div></div></div>
+          <span style="font-size:11px;color:var(--text2)">${pct}%</span>
+        </div>
+      </td>
+      <td>${statusBadge(a.status)}</td>
+      <td><div class="row-actions">
+        <button class="btn btn-sm" onclick="openModal('add',${a.id})" title="Editar">✎</button>
+        <button class="btn btn-sm btn-danger" onclick="deletarAtividade(${a.id})" title="Remover">✕</button>
+      </div></td>
+    </tr>`;
+  }).join('');
+}
+
+// =====================================================
+// PROJETOS
+// =====================================================
+function renderProjetos() {
+  const fc = document.getElementById('fp-cli').value;
+  const fa = document.getElementById('fp-area').value;
+  let list = projetos.filter(p=>{
+    if(fc && p.cliente!==fc) return false;
+    if(fa && p.area!==fa) return false;
+    return true;
+  });
+  const cont = document.getElementById('lista-projetos');
+  if(!list.length){ cont.innerHTML='<div class="empty">Nenhum projeto encontrado.</div>'; return; }
+  cont.innerHTML = list.map(prj=>{
+    const cli = getCli(prj.cliente);
+    const atv = atividades.filter(a=>a.proj===prj.id);
+    const total=atv.length, done=atv.filter(a=>a.status==='Concluída').length;
+    const late=atv.filter(a=>a.status==='Atrasada').length;
+    const hp=atv.reduce((s,a)=>s+a.hprev,0), hr=atv.reduce((s,a)=>s+a.hreal,0);
+    const pct=total>0?Math.round(done/total*100):0;
+    const devs=prj.prog.map(pid=>{const p=getProg(pid);return`<span class="avatar" style="background:${p?.cor};color:#333;width:26px;height:26px;font-size:10px" title="${p?.nome}">${p?.iniciais}</span>`;}).join('');
+    const prazoStr = prj.prazo ? `<span style="color:var(--text2);font-size:11px">Prazo: ${fmtDate(prj.prazo)}</span>` : '';
+    return `<div class="proj-card">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;flex-wrap:wrap;gap:8px">
+        <div>
+          <div style="font-weight:600;font-size:14px">${prj.nome}</div>
+          <div style="font-size:12px;color:var(--text2);margin-top:2px">${cli?.nome} · ${prj.area}</div>
+          ${prazoStr}
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <div style="text-align:right">
+            <div style="font-size:22px;font-weight:600">${pct}%</div>
+            <div style="font-size:11px;color:var(--text2)">concluído</div>
+          </div>
+          <div class="row-actions">
+            <button class="btn btn-sm" onclick="openModal('add-proj','${prj.id}')" title="Editar">✎</button>
+            <button class="btn btn-sm btn-danger" onclick="deletarProjeto('${prj.id}')" title="Remover">✕</button>
+          </div>
+        </div>
+      </div>
+      <div class="pbar" style="margin-bottom:8px"><div class="pbar-fill" style="width:${pct}%;background:${barColor(pct*1.2)}"></div></div>
+      <div style="display:flex;gap:12px;font-size:12px;color:var(--text2);flex-wrap:wrap;margin-bottom:8px">
+        <span>${total} atividade${total!==1?'s':''}</span>
+        <span style="color:var(--success)">${done} concluídas</span>
+        ${late>0?`<span style="color:var(--danger)">${late} atrasada${late!==1?'s':''}</span>`:''}
+        <span>${hr}/${hp}h</span>
+      </div>
+      <div style="display:flex;gap:4px;flex-wrap:wrap">${devs}</div>
+    </div>`;
+  }).join('');
+}
+
+// =====================================================
+// PROJEÇÃO
+// =====================================================
+function renderPrevisao() {
+  const fp = document.getElementById('fv-proj').value;
+  const list = fp ? projetos.filter(p=>p.id===fp) : projetos;
+  const cont = document.getElementById('lista-previsao');
+  if(!list.length){ cont.innerHTML='<div class="empty">Nenhum projeto encontrado.</div>'; return; }
+
+  cont.innerHTML = list.map(prj=>{
+    const cli = getCli(prj.cliente);
+    const atv = atividades.filter(a=>a.proj===prj.id);
+    const hp  = atv.reduce((s,a)=>s+a.hprev,0);
+    const hr  = atv.reduce((s,a)=>s+a.hreal,0);
+    const hpend = atv.filter(a=>a.status!=='Concluída').reduce((s,a)=>s+Math.max(0,a.hprev-a.hreal),0);
+    const desvio = hp>0 ? Math.round((hr-hp)/hp*100) : 0;
+    const concl  = atv.filter(a=>a.status==='Concluída').length;
+    const avgHC  = concl>0 ? (hr/concl).toFixed(1) : 0;
+    const pctGeral = hp>0 ? Math.min(Math.round(hr/hp*100),100) : 0;
+
+    let alertHtml = '';
+    if(desvio>15)       alertHtml=`<div class="alert alert-danger">⚠ Projeto ${desvio}% acima das horas previstas. Revisar escopo ou estimativas.</div>`;
+    else if(desvio>5)   alertHtml=`<div class="alert alert-warn">⚠ Projeto ${desvio}% acima do previsto. Monitorar.</div>`;
+    else if(desvio<-10) alertHtml=`<div class="alert alert-ok">✓ Projeto ${Math.abs(desvio)}% abaixo do previsto — boa eficiência.</div>`;
+
+    const rows = atv.map(a=>{
+      const pct = a.hprev>0 ? Math.min(Math.round(a.hreal/a.hprev*100),100) : 0;
+      const lbl = a.desc.length>28 ? a.desc.slice(0,28)+'…' : a.desc;
+      const p   = getProg(a.prog);
+      let cls = 'fc-planned';
+      if(a.status==='Concluída') cls='fc-done';
+      else if(a.hreal>a.hprev)  cls='fc-late';
+      return `<div class="fc-row">
+        <div class="fc-lbl" title="${a.desc}">${lbl}</div>
+        <div class="fc-bar"><div class="fc-fill ${cls}" style="width:${pct}%">${pct>18?pct+'%':''}</div></div>
+        <div class="fc-nums">${a.hreal}/${a.hprev}h</div>
+        <div style="width:90px;flex-shrink:0">${statusBadge(a.status)}</div>
+        <div style="width:28px;flex-shrink:0;font-size:10px;color:var(--text2)" title="${p?.nome}">${p?.iniciais}</div>
+      </div>`;
+    }).join('');
+
+    return `<div class="card" style="margin-bottom:12px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+        <div>
+          <div style="font-size:14px;font-weight:600">${prj.nome}</div>
+          <div style="font-size:12px;color:var(--text2)">${cli?.nome} · ${prj.area}</div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <div class="metric" style="text-align:center;padding:6px 12px">
+            <div class="metric-label">Previsto</div><div style="font-size:16px;font-weight:600">${hp}h</div>
+          </div>
+          <div class="metric" style="text-align:center;padding:6px 12px">
+            <div class="metric-label">Realizado</div><div style="font-size:16px;font-weight:600">${hr}h</div>
+          </div>
+          <div class="metric" style="text-align:center;padding:6px 12px">
+            <div class="metric-label">Pendente</div><div style="font-size:16px;font-weight:600">${hpend}h</div>
+          </div>
+          <div class="metric" style="text-align:center;padding:6px 12px;background:${desvio>5?'#FCEBEB':desvio<-5?'#EAF3DE':'var(--bg2)'}">
+            <div class="metric-label">Desvio</div>
+            <div style="font-size:16px;font-weight:600;color:${desvio>5?'var(--danger)':desvio<-5?'var(--success)':'var(--text)'}">${desvio>0?'+':''}${desvio}%</div>
+          </div>
+        </div>
+      </div>
+      ${alertHtml}
+      <div class="pbar" style="margin-bottom:12px;height:8px"><div class="pbar-fill" style="width:${pctGeral}%;background:${barColor(pctGeral)}"></div></div>
+      <div style="font-size:12px;color:var(--text2);margin-bottom:8px">Progresso por atividade (horas realizadas vs. previstas)</div>
+      ${rows}
+      <hr class="divider">
+      <div style="font-size:12px;color:var(--text2)">
+        Média por atividade concluída: <strong>${avgHC}h</strong> &nbsp;·&nbsp;
+        Estimativa para encerrar: <strong>~${hpend}h restantes</strong>
+        ${prj.prazo ? `&nbsp;·&nbsp; Prazo: <strong>${fmtDate(prj.prazo)}</strong>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// =====================================================
+// EQUIPE
+// =====================================================
+function renderEquipe() {
+  document.getElementById('lista-equipe').innerHTML = programadores.map(p=>{
+    const all  = atividades.filter(a=>a.prog===p.id);
+    const concl= all.filter(a=>a.status==='Concluída').length;
+    const and  = all.filter(a=>a.status==='Em Andamento').length;
+    const late = all.filter(a=>a.status==='Atrasada').length;
+    const hp   = all.reduce((s,a)=>s+a.hprev,0);
+    const hr   = all.reduce((s,a)=>s+a.hreal,0);
+    const pct  = hp>0 ? Math.min(Math.round(hr/hp*100),100) : 0;
+    const prjList= [...new Set(all.map(a=>a.proj))].map(id=>getProj(id)?.nome).filter(Boolean);
+    return `<div class="team-card">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+        <div class="avatar" style="width:44px;height:44px;font-size:15px;background:${p.cor};color:#333">${p.iniciais}</div>
+        <div>
+          <div style="font-weight:600;font-size:15px">${p.nome}</div>
+          <div style="margin-top:3px">${areaBadge(p.area)}</div>
+        </div>
+      </div>
+      <div class="grid3" style="margin-bottom:10px">
+        <div class="metric" style="text-align:center;padding:6px">
+          <div class="metric-label">Concluídas</div>
+          <div style="font-size:18px;font-weight:600;color:var(--success)">${concl}</div>
+        </div>
+        <div class="metric" style="text-align:center;padding:6px">
+          <div class="metric-label">Em andamento</div>
+          <div style="font-size:18px;font-weight:600;color:var(--warn)">${and}</div>
+        </div>
+        <div class="metric" style="text-align:center;padding:6px">
+          <div class="metric-label">Atrasadas</div>
+          <div style="font-size:18px;font-weight:600;color:var(--danger)">${late}</div>
+        </div>
+      </div>
+      <div style="font-size:12px;color:var(--text2);margin-bottom:4px">Horas: ${hr}h realizadas / ${hp}h previstas (${pct}%)</div>
+      <div class="pbar" style="margin-bottom:10px"><div class="pbar-fill" style="width:${pct}%;background:${barColor(pct)}"></div></div>
+      <div style="font-size:12px;color:var(--text2)">Projetos: ${prjList.join(', ')||'—'}</div>
+      <hr class="divider">
+      <button class="btn btn-sm" onclick="document.getElementById('f-prog').value='${p.id}';setPage('atividades')">Ver Atividades →</button>
+    </div>`;
+  }).join('');
+}
+
+// =====================================================
+// CONFIG
+// =====================================================
+function renderConfig() {
+  document.getElementById('cfg-progs').innerHTML = programadores.map(p=>`
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:0.5px solid var(--border)">
+      <div style="display:flex;align-items:center;gap:8px">
+        <span class="avatar" style="background:${p.cor};color:#333;width:26px;height:26px;font-size:10px">${p.iniciais}</span>
+        <div><div style="font-size:13px">${p.nome}</div><div style="font-size:11px;color:var(--text2)">${{ai:'Automação Industrial',ti:'TI',both:'Automação + TI'}[p.area]}</div></div>
+      </div>
+      <button class="btn btn-sm btn-danger" onclick="deletarProgramador('${p.id}')">✕</button>
+    </div>`).join('');
+
+  document.getElementById('cfg-clis').innerHTML = clientes.map(c=>`
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:0.5px solid var(--border)">
+      <div><div style="font-size:13px">${c.nome}</div><div style="font-size:11px;color:var(--text2)">${c.setor||''}</div></div>
+      <button class="btn btn-sm btn-danger" onclick="deletarCliente('${c.id}')">✕</button>
+    </div>`).join('');
+}
+
+// =====================================================
+// INIT
+// =====================================================
+populateSelects();
+renderDashboard();
+document.getElementById('dash-date').textContent =
+  new Date().toLocaleDateString('pt-BR',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+</script>
+</body>
+</html>
