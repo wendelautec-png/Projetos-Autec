@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
+<!-- saved from url=(0014)about:internet -->
+<html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gestão de Equipe — Programadores</title>
 <style>
@@ -183,14 +183,14 @@
     <div class="logo-sub">Controle de Atividades</div>
   </div>
   <span class="nav-label">Visão Geral</span>
-  <div class="nav-item active" onclick="setPage('dashboard')"><span class="nav-icon">📊</span>Dashboard</div>
+  <div class="nav-item active" onclick="setPage(&#39;dashboard&#39;)"><span class="nav-icon">📊</span>Dashboard</div>
   <span class="nav-label">Gestão</span>
-  <div class="nav-item" onclick="setPage('atividades')"><span class="nav-icon">📋</span>Atividades</div>
-  <div class="nav-item" onclick="setPage('projetos')"><span class="nav-icon">🗂</span>Projetos</div>
-  <div class="nav-item" onclick="setPage('previsao')"><span class="nav-icon">📈</span>Projeção de Tempo</div>
+  <div class="nav-item" onclick="setPage(&#39;atividades&#39;)"><span class="nav-icon">📋</span>Atividades</div>
+  <div class="nav-item" onclick="setPage(&#39;projetos&#39;)"><span class="nav-icon">🗂</span>Projetos</div>
+  <div class="nav-item" onclick="setPage(&#39;previsao&#39;)"><span class="nav-icon">📈</span>Projeção de Tempo</div>
   <span class="nav-label">Equipe</span>
-  <div class="nav-item" onclick="setPage('equipe')"><span class="nav-icon">👥</span>Programadores</div>
-  <div class="nav-item" onclick="setPage('config')"><span class="nav-icon">⚙</span>Configurações</div>
+  <div class="nav-item" onclick="setPage(&#39;equipe&#39;)"><span class="nav-icon">👥</span>Programadores</div>
+  <div class="nav-item" onclick="setPage(&#39;config&#39;)"><span class="nav-icon">⚙</span>Configurações</div>
   <div class="sidebar-footer">
     <p>Dados salvos localmente no navegador.<br>Use Chrome ou Edge para melhor experiência.</p>
   </div>
@@ -204,29 +204,164 @@
   <div class="page-header">
     <div>
       <div class="page-title">Dashboard</div>
-      <div class="page-sub" id="dash-date"></div>
+      <div class="page-sub" id="dash-date">quinta-feira, 16 de abril de 2026</div>
     </div>
-    <button class="btn btn-primary" onclick="openModal('add')">+ Nova Atividade</button>
+    <button class="btn btn-primary" onclick="openModal(&#39;add&#39;)">+ Nova Atividade</button>
   </div>
   <div class="grid4">
-    <div class="metric"><div class="metric-label">Total de Atividades</div><div class="metric-val" id="m-total">0</div></div>
-    <div class="metric"><div class="metric-label">Em Andamento</div><div class="metric-val" id="m-prog" style="color:var(--warn)">0</div></div>
-    <div class="metric"><div class="metric-label">Concluídas</div><div class="metric-val" id="m-done" style="color:var(--success)">0</div></div>
-    <div class="metric"><div class="metric-label">Atrasadas</div><div class="metric-val" id="m-late" style="color:var(--danger)">0</div></div>
+    <div class="metric"><div class="metric-label">Total de Atividades</div><div class="metric-val" id="m-total">14</div></div>
+    <div class="metric"><div class="metric-label">Em Andamento</div><div class="metric-val" id="m-prog" style="color:var(--warn)">7</div></div>
+    <div class="metric"><div class="metric-label">Concluídas</div><div class="metric-val" id="m-done" style="color:var(--success)">2</div></div>
+    <div class="metric"><div class="metric-label">Atrasadas</div><div class="metric-val" id="m-late" style="color:var(--danger)">1</div></div>
   </div>
   <div class="grid2">
     <div class="card">
       <div style="font-size:13px;font-weight:600;margin-bottom:12px;">Carga por Programador</div>
-      <div id="d-carga"></div>
+      <div id="d-carga"><div style="margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px;align-items:center">
+        <span style="display:flex;align-items:center;gap:6px">
+          <span class="avatar" style="background:#B5D4F4;color:#333;width:24px;height:24px;font-size:10px">CS</span>
+          <span>Carlos Silva</span><span class="badge b-ai">Automação</span>
+        </span>
+        <span style="color:var(--text2)">1 atv · 0/32h</span>
+      </div>
+      <div class="pbar"><div class="pbar-fill" style="width:0%;background:var(--success)"></div></div>
+    </div><div style="margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px;align-items:center">
+        <span style="display:flex;align-items:center;gap:6px">
+          <span class="avatar" style="background:#9FE1CB;color:#333;width:24px;height:24px;font-size:10px">MO</span>
+          <span>Marcos Oliveira</span><span class="badge b-ai">Automação</span>
+        </span>
+        <span style="color:var(--text2)">2 atv · 30/56h</span>
+      </div>
+      <div class="pbar"><div class="pbar-fill" style="width:54%;background:var(--success)"></div></div>
+    </div><div style="margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px;align-items:center">
+        <span style="display:flex;align-items:center;gap:6px">
+          <span class="avatar" style="background:#F5C4B3;color:#333;width:24px;height:24px;font-size:10px">RS</span>
+          <span>Rafael Santos</span><span class="badge b-ai">Automação</span>
+        </span>
+        <span style="color:var(--text2)">3 atv · 61/104h</span>
+      </div>
+      <div class="pbar"><div class="pbar-fill" style="width:59%;background:var(--success)"></div></div>
+    </div><div style="margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px;align-items:center">
+        <span style="display:flex;align-items:center;gap:6px">
+          <span class="avatar" style="background:#FAC775;color:#333;width:24px;height:24px;font-size:10px">EC</span>
+          <span>Eduardo Costa</span><span class="badge b-ai">Automação</span>
+        </span>
+        <span style="color:var(--text2)">1 atv · 95/80h</span>
+      </div>
+      <div class="pbar"><div class="pbar-fill" style="width:100%;background:var(--warn)"></div></div>
+    </div><div style="margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px;align-items:center">
+        <span style="display:flex;align-items:center;gap:6px">
+          <span class="avatar" style="background:#CECBF6;color:#333;width:24px;height:24px;font-size:10px">LF</span>
+          <span>Lucas Ferreira</span><span class="badge b-ti">TI</span>
+        </span>
+        <span style="color:var(--text2)">2 atv · 60/104h</span>
+      </div>
+      <div class="pbar"><div class="pbar-fill" style="width:58%;background:var(--success)"></div></div>
+    </div><div style="margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px;align-items:center">
+        <span style="display:flex;align-items:center;gap:6px">
+          <span class="avatar" style="background:#F4C0D1;color:#333;width:24px;height:24px;font-size:10px">DA</span>
+          <span>Diego Almeida</span><span class="badge b-both">Automação + TI</span>
+        </span>
+        <span style="color:var(--text2)">3 atv · 45/104h</span>
+      </div>
+      <div class="pbar"><div class="pbar-fill" style="width:43%;background:var(--success)"></div></div>
+    </div><div style="margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px;align-items:center">
+        <span style="display:flex;align-items:center;gap:6px">
+          <span class="avatar" style="background:#b4f4f3;color:#333;width:24px;height:24px;font-size:10px">J</span>
+          <span>João</span><span class="badge b-ai">Automação</span>
+        </span>
+        <span style="color:var(--text2)">0 atv · 0/0h</span>
+      </div>
+      <div class="pbar"><div class="pbar-fill" style="width:0%;background:var(--success)"></div></div>
+    </div></div>
     </div>
     <div class="card">
       <div style="font-size:13px;font-weight:600;margin-bottom:12px;">Progresso dos Projetos</div>
-      <div id="d-proj"></div>
+      <div id="d-proj"><div style="margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px">
+        <span><strong>Automação Linha 3</strong> <span style="color:var(--text2);font-size:11px">Metalúrgica Aço Forte</span></span>
+        <span style="color:var(--text2)">2/3 (67%)</span>
+      </div>
+      <div class="pbar"><div class="pbar-fill" style="width:67%;background:var(--warn)"></div></div>
+    </div><div style="margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px">
+        <span><strong>SCADA Refinaria</strong> <span style="color:var(--text2);font-size:11px">Petroquímica Nordeste</span></span>
+        <span style="color:var(--text2)">0/4 (0%)</span>
+      </div>
+      <div class="pbar"><div class="pbar-fill" style="width:0%;background:var(--success)"></div></div>
+    </div><div style="margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px">
+        <span><strong>Sistema MES</strong> <span style="color:var(--text2);font-size:11px">Indústria Têxtil Sul</span></span>
+        <span style="color:var(--text2)">0/2 (0%)</span>
+      </div>
+      <div class="pbar"><div class="pbar-fill" style="width:0%;background:var(--success)"></div></div>
+    </div><div style="margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px">
+        <span><strong>ERP Integração</strong> <span style="color:var(--text2);font-size:11px">LogTech Soluções</span></span>
+        <span style="color:var(--text2)">0/2 (0%)</span>
+      </div>
+      <div class="pbar"><div class="pbar-fill" style="width:0%;background:var(--success)"></div></div>
+    </div><div style="margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px">
+        <span><strong>Portal do Cliente</strong> <span style="color:var(--text2);font-size:11px">LogTech Soluções</span></span>
+        <span style="color:var(--text2)">0/1 (0%)</span>
+      </div>
+      <div class="pbar"><div class="pbar-fill" style="width:0%;background:var(--success)"></div></div>
+    </div><div style="margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px">
+        <span><strong>Supervisório CLP</strong> <span style="color:var(--text2);font-size:11px">Alimentos Vitória</span></span>
+        <span style="color:var(--text2)">0/2 (0%)</span>
+      </div>
+      <div class="pbar"><div class="pbar-fill" style="width:0%;background:var(--success)"></div></div>
+    </div></div>
     </div>
   </div>
   <div class="card">
     <div style="font-size:13px;font-weight:600;margin-bottom:12px;">🔔 Próximas Entregas</div>
-    <div id="d-proximas"></div>
+    <div id="d-proximas"><table><thead><tr><th>Atividade</th><th>Programador</th><th>Projeto</th><th>Entrega</th><th>Status</th></tr></thead><tbody><tr>
+        <td>Módulo rastreabilidade MES</td>
+        <td style="white-space:nowrap"><span class="avatar" style="background:#FAC775;color:#333;width:22px;height:22px;font-size:9px">EC</span> Eduardo Costa</td>
+        <td>Sistema MES</td>
+        <td style="color:var(--danger)">30/03/2025</td>
+        <td><span class="badge b-late">Atrasada</span></td>
+      </tr><tr>
+        <td>Módulo fiscal ERP</td>
+        <td style="white-space:nowrap"><span class="avatar" style="background:#CECBF6;color:#333;width:22px;height:22px;font-size:9px">LF</span> Lucas Ferreira</td>
+        <td>ERP Integração</td>
+        <td style="color:var(--danger)">10/04/2025</td>
+        <td><span class="badge b-prog">Em Andamento</span></td>
+      </tr><tr>
+        <td>Desenvolvimento telas SCADA</td>
+        <td style="white-space:nowrap"><span class="avatar" style="background:#F5C4B3;color:#333;width:22px;height:22px;font-size:9px">RS</span> Rafael Santos</td>
+        <td>SCADA Refinaria</td>
+        <td style="color:var(--danger)">15/04/2025</td>
+        <td><span class="badge b-prog">Em Andamento</span></td>
+      </tr><tr>
+        <td>Programação supervisório CLP</td>
+        <td style="white-space:nowrap"><span class="avatar" style="background:#9FE1CB;color:#333;width:22px;height:22px;font-size:9px">MO</span> Marcos Oliveira</td>
+        <td>Supervisório CLP</td>
+        <td style="color:var(--danger)">15/04/2025</td>
+        <td><span class="badge b-prog">Em Andamento</span></td>
+      </tr><tr>
+        <td>Interface HMI Têxtil</td>
+        <td style="white-space:nowrap"><span class="avatar" style="background:#B5D4F4;color:#333;width:22px;height:22px;font-size:9px">CS</span> Carlos Silva</td>
+        <td>Sistema MES</td>
+        <td style="color:var(--danger)">20/04/2025</td>
+        <td><span class="badge b-pend">Pendente</span></td>
+      </tr><tr>
+        <td>API integração WMS</td>
+        <td style="white-space:nowrap"><span class="avatar" style="background:#F4C0D1;color:#333;width:22px;height:22px;font-size:9px">DA</span> Diego Almeida</td>
+        <td>ERP Integração</td>
+        <td style="color:var(--danger)">25/04/2025</td>
+        <td><span class="badge b-prog">Em Andamento</span></td>
+      </tr></tbody></table></div>
   </div>
 </div>
 
@@ -237,12 +372,12 @@
       <div class="page-title">Atividades</div>
       <div class="page-sub" id="ativ-count"></div>
     </div>
-    <button class="btn btn-primary" onclick="openModal('add')">+ Nova Atividade</button>
+    <button class="btn btn-primary" onclick="openModal(&#39;add&#39;)">+ Nova Atividade</button>
   </div>
   <div class="filters">
-    <div class="fgroup"><label>Programador</label><select id="f-prog" onchange="renderAtividades()"><option value="">Todos</option></select></div>
-    <div class="fgroup"><label>Cliente</label><select id="f-cli" onchange="renderAtividades()"><option value="">Todos</option></select></div>
-    <div class="fgroup"><label>Projeto</label><select id="f-proj" onchange="renderAtividades()"><option value="">Todos</option></select></div>
+    <div class="fgroup"><label>Programador</label><select id="f-prog" onchange="renderAtividades()"><option value="">Todos</option><option value="P1">Carlos Silva</option><option value="P2">Marcos Oliveira</option><option value="P3">Rafael Santos</option><option value="P4">Eduardo Costa</option><option value="P5">Lucas Ferreira</option><option value="P6">Diego Almeida</option><option value="P7">João</option></select></div>
+    <div class="fgroup"><label>Cliente</label><select id="f-cli" onchange="renderAtividades()"><option value="">Todos</option><option value="C1">Metalúrgica Aço Forte</option><option value="C2">Petroquímica Nordeste</option><option value="C3">Indústria Têxtil Sul</option><option value="C4">LogTech Soluções</option><option value="C5">Alimentos Vitória</option></select></div>
+    <div class="fgroup"><label>Projeto</label><select id="f-proj" onchange="renderAtividades()"><option value="">Todos</option><option value="PRJ01">Automação Linha 3</option><option value="PRJ02">SCADA Refinaria</option><option value="PRJ03">Sistema MES</option><option value="PRJ04">ERP Integração</option><option value="PRJ05">Portal do Cliente</option><option value="PRJ06">Supervisório CLP</option></select></div>
     <div class="fgroup"><label>Status</label>
       <select id="f-status" onchange="renderAtividades()">
         <option value="">Todos</option><option>Pendente</option><option>Em Andamento</option><option>Concluída</option><option>Atrasada</option>
@@ -267,10 +402,10 @@
 <div id="p-projetos" class="page">
   <div class="page-header">
     <div><div class="page-title">Projetos</div></div>
-    <button class="btn btn-primary" onclick="openModal('add-proj')">+ Novo Projeto</button>
+    <button class="btn btn-primary" onclick="openModal(&#39;add-proj&#39;)">+ Novo Projeto</button>
   </div>
   <div class="filters">
-    <div class="fgroup"><label>Cliente</label><select id="fp-cli" onchange="renderProjetos()"><option value="">Todos</option></select></div>
+    <div class="fgroup"><label>Cliente</label><select id="fp-cli" onchange="renderProjetos()"><option value="">Todos</option><option value="C1">Metalúrgica Aço Forte</option><option value="C2">Petroquímica Nordeste</option><option value="C3">Indústria Têxtil Sul</option><option value="C4">LogTech Soluções</option><option value="C5">Alimentos Vitória</option></select></div>
     <div class="fgroup"><label>Área</label>
       <select id="fp-area" onchange="renderProjetos()">
         <option value="">Todas</option><option>Automação Industrial</option><option>TI</option>
@@ -286,9 +421,285 @@
     <div><div class="page-title">Projeção de Tempo</div><div class="page-sub">Análise previsto vs. realizado por projeto</div></div>
   </div>
   <div class="filters">
-    <div class="fgroup"><label>Projeto</label><select id="fv-proj" onchange="renderPrevisao()"><option value="">Todos</option></select></div>
+    <div class="fgroup"><label>Projeto</label><select id="fv-proj" onchange="renderPrevisao()"><option value="">Todos</option><option value="PRJ01">Automação Linha 3</option><option value="PRJ02">SCADA Refinaria</option><option value="PRJ03">Sistema MES</option><option value="PRJ04">ERP Integração</option><option value="PRJ05">Portal do Cliente</option><option value="PRJ06">Supervisório CLP</option></select></div>
   </div>
-  <div id="lista-previsao"></div>
+  <div id="lista-previsao"><div class="card" style="margin-bottom:12px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+        <div>
+          <div style="font-size:14px;font-weight:600">Automação Linha 3</div>
+          <div style="font-size:12px;color:var(--text2)">Metalúrgica Aço Forte · Automação Industrial</div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <div class="metric" style="text-align:center;padding:6px 12px">
+            <div class="metric-label">Previsto</div><div style="font-size:16px;font-weight:600">84h</div>
+          </div>
+          <div class="metric" style="text-align:center;padding:6px 12px">
+            <div class="metric-label">Realizado</div><div style="font-size:16px;font-weight:600">58h</div>
+          </div>
+          <div class="metric" style="text-align:center;padding:6px 12px">
+            <div class="metric-label">Pendente</div><div style="font-size:16px;font-weight:600">20h</div>
+          </div>
+          <div class="metric" style="text-align:center;padding:6px 12px;background:#EAF3DE">
+            <div class="metric-label">Desvio</div>
+            <div style="font-size:16px;font-weight:600;color:var(--success)">-31%</div>
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-ok">✓ Projeto 31% abaixo do previsto — boa eficiência.</div>
+      <div class="pbar" style="margin-bottom:12px;height:8px"><div class="pbar-fill" style="width:69%;background:var(--success)"></div></div>
+      <div style="font-size:12px;color:var(--text2);margin-bottom:8px">Progresso por atividade (horas realizadas vs. previstas)</div>
+      <div class="fc-row">
+        <div class="fc-lbl" title="Programação CLP S7-1200">Programação CLP S7-1200</div>
+        <div class="fc-bar"><div class="fc-fill fc-done" style="width:95%">95%</div></div>
+        <div class="fc-nums">38/40h</div>
+        <div style="width:90px;flex-shrink:0"><span class="badge b-ok">Concluída</span></div>
+        <div style="width:28px;flex-shrink:0;font-size:10px;color:var(--text2)" title="Carlos Silva">CS</div>
+      </div><div class="fc-row">
+        <div class="fc-lbl" title="Configuração rede Profinet">Configuração rede Profinet</div>
+        <div class="fc-bar"><div class="fc-fill fc-done" style="width:83%">83%</div></div>
+        <div class="fc-nums">20/24h</div>
+        <div style="width:90px;flex-shrink:0"><span class="badge b-ok">Concluída</span></div>
+        <div style="width:28px;flex-shrink:0;font-size:10px;color:var(--text2)" title="Marcos Oliveira">MO</div>
+      </div><div class="fc-row">
+        <div class="fc-lbl" title="Testes e comissionamento linha 3">Testes e comissionamento lin…</div>
+        <div class="fc-bar"><div class="fc-fill fc-planned" style="width:0%"></div></div>
+        <div class="fc-nums">0/20h</div>
+        <div style="width:90px;flex-shrink:0"><span class="badge b-pend">Pendente</span></div>
+        <div style="width:28px;flex-shrink:0;font-size:10px;color:var(--text2)" title="Marcos Oliveira">MO</div>
+      </div>
+      <hr class="divider">
+      <div style="font-size:12px;color:var(--text2)">
+        Média por atividade concluída: <strong>29.0h</strong> &nbsp;·&nbsp;
+        Estimativa para encerrar: <strong>~20h restantes</strong>
+        &nbsp;·&nbsp; Prazo: <strong>30/05/2025</strong>
+      </div>
+    </div><div class="card" style="margin-bottom:12px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+        <div>
+          <div style="font-size:14px;font-weight:600">SCADA Refinaria</div>
+          <div style="font-size:12px;color:var(--text2)">Petroquímica Nordeste · Automação Industrial</div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <div class="metric" style="text-align:center;padding:6px 12px">
+            <div class="metric-label">Previsto</div><div style="font-size:16px;font-weight:600">140h</div>
+          </div>
+          <div class="metric" style="text-align:center;padding:6px 12px">
+            <div class="metric-label">Realizado</div><div style="font-size:16px;font-weight:600">85h</div>
+          </div>
+          <div class="metric" style="text-align:center;padding:6px 12px">
+            <div class="metric-label">Pendente</div><div style="font-size:16px;font-weight:600">55h</div>
+          </div>
+          <div class="metric" style="text-align:center;padding:6px 12px;background:#EAF3DE">
+            <div class="metric-label">Desvio</div>
+            <div style="font-size:16px;font-weight:600;color:var(--success)">-39%</div>
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-ok">✓ Projeto 39% abaixo do previsto — boa eficiência.</div>
+      <div class="pbar" style="margin-bottom:12px;height:8px"><div class="pbar-fill" style="width:61%;background:var(--success)"></div></div>
+      <div style="font-size:12px;color:var(--text2);margin-bottom:8px">Progresso por atividade (horas realizadas vs. previstas)</div>
+      <div class="fc-row">
+        <div class="fc-lbl" title="Desenvolvimento telas SCADA">Desenvolvimento telas SCADA</div>
+        <div class="fc-bar"><div class="fc-fill fc-planned" style="width:92%">92%</div></div>
+        <div class="fc-nums">55/60h</div>
+        <div style="width:90px;flex-shrink:0"><span class="badge b-prog">Em Andamento</span></div>
+        <div style="width:28px;flex-shrink:0;font-size:10px;color:var(--text2)" title="Rafael Santos">RS</div>
+      </div><div class="fc-row">
+        <div class="fc-lbl" title="Integração OPC-UA refinaria">Integração OPC-UA refinaria</div>
+        <div class="fc-bar"><div class="fc-fill fc-planned" style="width:63%">63%</div></div>
+        <div class="fc-nums">30/48h</div>
+        <div style="width:90px;flex-shrink:0"><span class="badge b-prog">Em Andamento</span></div>
+        <div style="width:28px;flex-shrink:0;font-size:10px;color:var(--text2)" title="Diego Almeida">DA</div>
+      </div><div class="fc-row">
+        <div class="fc-lbl" title="Documentação técnica SCADA">Documentação técnica SCADA</div>
+        <div class="fc-bar"><div class="fc-fill fc-planned" style="width:0%"></div></div>
+        <div class="fc-nums">0/16h</div>
+        <div style="width:90px;flex-shrink:0"><span class="badge b-pend">Pendente</span></div>
+        <div style="width:28px;flex-shrink:0;font-size:10px;color:var(--text2)" title="Rafael Santos">RS</div>
+      </div><div class="fc-row">
+        <div class="fc-lbl" title="Treinamento operadores refinaria">Treinamento operadores refin…</div>
+        <div class="fc-bar"><div class="fc-fill fc-planned" style="width:0%"></div></div>
+        <div class="fc-nums">0/16h</div>
+        <div style="width:90px;flex-shrink:0"><span class="badge b-pend">Pendente</span></div>
+        <div style="width:28px;flex-shrink:0;font-size:10px;color:var(--text2)" title="Diego Almeida">DA</div>
+      </div>
+      <hr class="divider">
+      <div style="font-size:12px;color:var(--text2)">
+        Média por atividade concluída: <strong>0h</strong> &nbsp;·&nbsp;
+        Estimativa para encerrar: <strong>~55h restantes</strong>
+        &nbsp;·&nbsp; Prazo: <strong>15/06/2025</strong>
+      </div>
+    </div><div class="card" style="margin-bottom:12px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+        <div>
+          <div style="font-size:14px;font-weight:600">Sistema MES</div>
+          <div style="font-size:12px;color:var(--text2)">Indústria Têxtil Sul · Automação Industrial</div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <div class="metric" style="text-align:center;padding:6px 12px">
+            <div class="metric-label">Previsto</div><div style="font-size:16px;font-weight:600">112h</div>
+          </div>
+          <div class="metric" style="text-align:center;padding:6px 12px">
+            <div class="metric-label">Realizado</div><div style="font-size:16px;font-weight:600">95h</div>
+          </div>
+          <div class="metric" style="text-align:center;padding:6px 12px">
+            <div class="metric-label">Pendente</div><div style="font-size:16px;font-weight:600">32h</div>
+          </div>
+          <div class="metric" style="text-align:center;padding:6px 12px;background:#EAF3DE">
+            <div class="metric-label">Desvio</div>
+            <div style="font-size:16px;font-weight:600;color:var(--success)">-15%</div>
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-ok">✓ Projeto 15% abaixo do previsto — boa eficiência.</div>
+      <div class="pbar" style="margin-bottom:12px;height:8px"><div class="pbar-fill" style="width:85%;background:var(--warn)"></div></div>
+      <div style="font-size:12px;color:var(--text2);margin-bottom:8px">Progresso por atividade (horas realizadas vs. previstas)</div>
+      <div class="fc-row">
+        <div class="fc-lbl" title="Módulo rastreabilidade MES">Módulo rastreabilidade MES</div>
+        <div class="fc-bar"><div class="fc-fill fc-late" style="width:100%">100%</div></div>
+        <div class="fc-nums">95/80h</div>
+        <div style="width:90px;flex-shrink:0"><span class="badge b-late">Atrasada</span></div>
+        <div style="width:28px;flex-shrink:0;font-size:10px;color:var(--text2)" title="Eduardo Costa">EC</div>
+      </div><div class="fc-row">
+        <div class="fc-lbl" title="Interface HMI Têxtil">Interface HMI Têxtil</div>
+        <div class="fc-bar"><div class="fc-fill fc-planned" style="width:0%"></div></div>
+        <div class="fc-nums">0/32h</div>
+        <div style="width:90px;flex-shrink:0"><span class="badge b-pend">Pendente</span></div>
+        <div style="width:28px;flex-shrink:0;font-size:10px;color:var(--text2)" title="Carlos Silva">CS</div>
+      </div>
+      <hr class="divider">
+      <div style="font-size:12px;color:var(--text2)">
+        Média por atividade concluída: <strong>0h</strong> &nbsp;·&nbsp;
+        Estimativa para encerrar: <strong>~32h restantes</strong>
+        &nbsp;·&nbsp; Prazo: <strong>20/05/2025</strong>
+      </div>
+    </div><div class="card" style="margin-bottom:12px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+        <div>
+          <div style="font-size:14px;font-weight:600">ERP Integração</div>
+          <div style="font-size:12px;color:var(--text2)">LogTech Soluções · TI</div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <div class="metric" style="text-align:center;padding:6px 12px">
+            <div class="metric-label">Previsto</div><div style="font-size:16px;font-weight:600">96h</div>
+          </div>
+          <div class="metric" style="text-align:center;padding:6px 12px">
+            <div class="metric-label">Realizado</div><div style="font-size:16px;font-weight:600">67h</div>
+          </div>
+          <div class="metric" style="text-align:center;padding:6px 12px">
+            <div class="metric-label">Pendente</div><div style="font-size:16px;font-weight:600">29h</div>
+          </div>
+          <div class="metric" style="text-align:center;padding:6px 12px;background:#EAF3DE">
+            <div class="metric-label">Desvio</div>
+            <div style="font-size:16px;font-weight:600;color:var(--success)">-30%</div>
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-ok">✓ Projeto 30% abaixo do previsto — boa eficiência.</div>
+      <div class="pbar" style="margin-bottom:12px;height:8px"><div class="pbar-fill" style="width:70%;background:var(--success)"></div></div>
+      <div style="font-size:12px;color:var(--text2);margin-bottom:8px">Progresso por atividade (horas realizadas vs. previstas)</div>
+      <div class="fc-row">
+        <div class="fc-lbl" title="Módulo fiscal ERP">Módulo fiscal ERP</div>
+        <div class="fc-bar"><div class="fc-fill fc-planned" style="width:93%">93%</div></div>
+        <div class="fc-nums">52/56h</div>
+        <div style="width:90px;flex-shrink:0"><span class="badge b-prog">Em Andamento</span></div>
+        <div style="width:28px;flex-shrink:0;font-size:10px;color:var(--text2)" title="Lucas Ferreira">LF</div>
+      </div><div class="fc-row">
+        <div class="fc-lbl" title="API integração WMS">API integração WMS</div>
+        <div class="fc-bar"><div class="fc-fill fc-planned" style="width:38%">38%</div></div>
+        <div class="fc-nums">15/40h</div>
+        <div style="width:90px;flex-shrink:0"><span class="badge b-prog">Em Andamento</span></div>
+        <div style="width:28px;flex-shrink:0;font-size:10px;color:var(--text2)" title="Diego Almeida">DA</div>
+      </div>
+      <hr class="divider">
+      <div style="font-size:12px;color:var(--text2)">
+        Média por atividade concluída: <strong>0h</strong> &nbsp;·&nbsp;
+        Estimativa para encerrar: <strong>~29h restantes</strong>
+        &nbsp;·&nbsp; Prazo: <strong>30/06/2025</strong>
+      </div>
+    </div><div class="card" style="margin-bottom:12px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+        <div>
+          <div style="font-size:14px;font-weight:600">Portal do Cliente</div>
+          <div style="font-size:12px;color:var(--text2)">LogTech Soluções · TI</div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <div class="metric" style="text-align:center;padding:6px 12px">
+            <div class="metric-label">Previsto</div><div style="font-size:16px;font-weight:600">48h</div>
+          </div>
+          <div class="metric" style="text-align:center;padding:6px 12px">
+            <div class="metric-label">Realizado</div><div style="font-size:16px;font-weight:600">8h</div>
+          </div>
+          <div class="metric" style="text-align:center;padding:6px 12px">
+            <div class="metric-label">Pendente</div><div style="font-size:16px;font-weight:600">40h</div>
+          </div>
+          <div class="metric" style="text-align:center;padding:6px 12px;background:#EAF3DE">
+            <div class="metric-label">Desvio</div>
+            <div style="font-size:16px;font-weight:600;color:var(--success)">-83%</div>
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-ok">✓ Projeto 83% abaixo do previsto — boa eficiência.</div>
+      <div class="pbar" style="margin-bottom:12px;height:8px"><div class="pbar-fill" style="width:17%;background:var(--success)"></div></div>
+      <div style="font-size:12px;color:var(--text2);margin-bottom:8px">Progresso por atividade (horas realizadas vs. previstas)</div>
+      <div class="fc-row">
+        <div class="fc-lbl" title="Front-end portal fornecedores">Front-end portal fornecedore…</div>
+        <div class="fc-bar"><div class="fc-fill fc-planned" style="width:17%"></div></div>
+        <div class="fc-nums">8/48h</div>
+        <div style="width:90px;flex-shrink:0"><span class="badge b-prog">Em Andamento</span></div>
+        <div style="width:28px;flex-shrink:0;font-size:10px;color:var(--text2)" title="Lucas Ferreira">LF</div>
+      </div>
+      <hr class="divider">
+      <div style="font-size:12px;color:var(--text2)">
+        Média por atividade concluída: <strong>0h</strong> &nbsp;·&nbsp;
+        Estimativa para encerrar: <strong>~40h restantes</strong>
+        &nbsp;·&nbsp; Prazo: <strong>15/05/2025</strong>
+      </div>
+    </div><div class="card" style="margin-bottom:12px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+        <div>
+          <div style="font-size:14px;font-weight:600">Supervisório CLP</div>
+          <div style="font-size:12px;color:var(--text2)">Alimentos Vitória · Automação Industrial</div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <div class="metric" style="text-align:center;padding:6px 12px">
+            <div class="metric-label">Previsto</div><div style="font-size:16px;font-weight:600">64h</div>
+          </div>
+          <div class="metric" style="text-align:center;padding:6px 12px">
+            <div class="metric-label">Realizado</div><div style="font-size:16px;font-weight:600">36h</div>
+          </div>
+          <div class="metric" style="text-align:center;padding:6px 12px">
+            <div class="metric-label">Pendente</div><div style="font-size:16px;font-weight:600">28h</div>
+          </div>
+          <div class="metric" style="text-align:center;padding:6px 12px;background:#EAF3DE">
+            <div class="metric-label">Desvio</div>
+            <div style="font-size:16px;font-weight:600;color:var(--success)">-44%</div>
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-ok">✓ Projeto 44% abaixo do previsto — boa eficiência.</div>
+      <div class="pbar" style="margin-bottom:12px;height:8px"><div class="pbar-fill" style="width:56%;background:var(--success)"></div></div>
+      <div style="font-size:12px;color:var(--text2);margin-bottom:8px">Progresso por atividade (horas realizadas vs. previstas)</div>
+      <div class="fc-row">
+        <div class="fc-lbl" title="Programação supervisório CLP">Programação supervisório CLP</div>
+        <div class="fc-bar"><div class="fc-fill fc-planned" style="width:83%">83%</div></div>
+        <div class="fc-nums">30/36h</div>
+        <div style="width:90px;flex-shrink:0"><span class="badge b-prog">Em Andamento</span></div>
+        <div style="width:28px;flex-shrink:0;font-size:10px;color:var(--text2)" title="Marcos Oliveira">MO</div>
+      </div><div class="fc-row">
+        <div class="fc-lbl" title="Alarmes e histórico de eventos">Alarmes e histórico de event…</div>
+        <div class="fc-bar"><div class="fc-fill fc-planned" style="width:21%">21%</div></div>
+        <div class="fc-nums">6/28h</div>
+        <div style="width:90px;flex-shrink:0"><span class="badge b-prog">Em Andamento</span></div>
+        <div style="width:28px;flex-shrink:0;font-size:10px;color:var(--text2)" title="Rafael Santos">RS</div>
+      </div>
+      <hr class="divider">
+      <div style="font-size:12px;color:var(--text2)">
+        Média por atividade concluída: <strong>0h</strong> &nbsp;·&nbsp;
+        Estimativa para encerrar: <strong>~28h restantes</strong>
+        &nbsp;·&nbsp; Prazo: <strong>10/05/2025</strong>
+      </div>
+    </div></div>
 </div>
 
 <!-- ===== EQUIPE ===== -->
@@ -296,7 +707,196 @@
   <div class="page-header">
     <div><div class="page-title">Programadores</div><div class="page-sub">6 profissionais</div></div>
   </div>
-  <div id="lista-equipe" class="grid2"></div>
+  <div id="lista-equipe" class="grid2"><div class="team-card">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+        <div class="avatar" style="width:44px;height:44px;font-size:15px;background:#B5D4F4;color:#333">CS</div>
+        <div>
+          <div style="font-weight:600;font-size:15px">Carlos Silva</div>
+          <div style="margin-top:3px"><span class="badge b-ai">Automação</span></div>
+        </div>
+      </div>
+      <div class="grid3" style="margin-bottom:10px">
+        <div class="metric" style="text-align:center;padding:6px">
+          <div class="metric-label">Concluídas</div>
+          <div style="font-size:18px;font-weight:600;color:var(--success)">1</div>
+        </div>
+        <div class="metric" style="text-align:center;padding:6px">
+          <div class="metric-label">Em andamento</div>
+          <div style="font-size:18px;font-weight:600;color:var(--warn)">0</div>
+        </div>
+        <div class="metric" style="text-align:center;padding:6px">
+          <div class="metric-label">Atrasadas</div>
+          <div style="font-size:18px;font-weight:600;color:var(--danger)">0</div>
+        </div>
+      </div>
+      <div style="font-size:12px;color:var(--text2);margin-bottom:4px">Horas: 38h realizadas / 72h previstas (53%)</div>
+      <div class="pbar" style="margin-bottom:10px"><div class="pbar-fill" style="width:53%;background:var(--success)"></div></div>
+      <div style="font-size:12px;color:var(--text2)">Projetos: Automação Linha 3, Sistema MES</div>
+      <hr class="divider">
+      <button class="btn btn-sm" onclick="document.getElementById(&#39;f-prog&#39;).value=&#39;P1&#39;;setPage(&#39;atividades&#39;)">Ver Atividades →</button>
+    </div><div class="team-card">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+        <div class="avatar" style="width:44px;height:44px;font-size:15px;background:#9FE1CB;color:#333">MO</div>
+        <div>
+          <div style="font-weight:600;font-size:15px">Marcos Oliveira</div>
+          <div style="margin-top:3px"><span class="badge b-ai">Automação</span></div>
+        </div>
+      </div>
+      <div class="grid3" style="margin-bottom:10px">
+        <div class="metric" style="text-align:center;padding:6px">
+          <div class="metric-label">Concluídas</div>
+          <div style="font-size:18px;font-weight:600;color:var(--success)">1</div>
+        </div>
+        <div class="metric" style="text-align:center;padding:6px">
+          <div class="metric-label">Em andamento</div>
+          <div style="font-size:18px;font-weight:600;color:var(--warn)">1</div>
+        </div>
+        <div class="metric" style="text-align:center;padding:6px">
+          <div class="metric-label">Atrasadas</div>
+          <div style="font-size:18px;font-weight:600;color:var(--danger)">0</div>
+        </div>
+      </div>
+      <div style="font-size:12px;color:var(--text2);margin-bottom:4px">Horas: 50h realizadas / 80h previstas (63%)</div>
+      <div class="pbar" style="margin-bottom:10px"><div class="pbar-fill" style="width:63%;background:var(--success)"></div></div>
+      <div style="font-size:12px;color:var(--text2)">Projetos: Automação Linha 3, Supervisório CLP</div>
+      <hr class="divider">
+      <button class="btn btn-sm" onclick="document.getElementById(&#39;f-prog&#39;).value=&#39;P2&#39;;setPage(&#39;atividades&#39;)">Ver Atividades →</button>
+    </div><div class="team-card">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+        <div class="avatar" style="width:44px;height:44px;font-size:15px;background:#F5C4B3;color:#333">RS</div>
+        <div>
+          <div style="font-weight:600;font-size:15px">Rafael Santos</div>
+          <div style="margin-top:3px"><span class="badge b-ai">Automação</span></div>
+        </div>
+      </div>
+      <div class="grid3" style="margin-bottom:10px">
+        <div class="metric" style="text-align:center;padding:6px">
+          <div class="metric-label">Concluídas</div>
+          <div style="font-size:18px;font-weight:600;color:var(--success)">0</div>
+        </div>
+        <div class="metric" style="text-align:center;padding:6px">
+          <div class="metric-label">Em andamento</div>
+          <div style="font-size:18px;font-weight:600;color:var(--warn)">2</div>
+        </div>
+        <div class="metric" style="text-align:center;padding:6px">
+          <div class="metric-label">Atrasadas</div>
+          <div style="font-size:18px;font-weight:600;color:var(--danger)">0</div>
+        </div>
+      </div>
+      <div style="font-size:12px;color:var(--text2);margin-bottom:4px">Horas: 61h realizadas / 104h previstas (59%)</div>
+      <div class="pbar" style="margin-bottom:10px"><div class="pbar-fill" style="width:59%;background:var(--success)"></div></div>
+      <div style="font-size:12px;color:var(--text2)">Projetos: SCADA Refinaria, Supervisório CLP</div>
+      <hr class="divider">
+      <button class="btn btn-sm" onclick="document.getElementById(&#39;f-prog&#39;).value=&#39;P3&#39;;setPage(&#39;atividades&#39;)">Ver Atividades →</button>
+    </div><div class="team-card">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+        <div class="avatar" style="width:44px;height:44px;font-size:15px;background:#FAC775;color:#333">EC</div>
+        <div>
+          <div style="font-weight:600;font-size:15px">Eduardo Costa</div>
+          <div style="margin-top:3px"><span class="badge b-ai">Automação</span></div>
+        </div>
+      </div>
+      <div class="grid3" style="margin-bottom:10px">
+        <div class="metric" style="text-align:center;padding:6px">
+          <div class="metric-label">Concluídas</div>
+          <div style="font-size:18px;font-weight:600;color:var(--success)">0</div>
+        </div>
+        <div class="metric" style="text-align:center;padding:6px">
+          <div class="metric-label">Em andamento</div>
+          <div style="font-size:18px;font-weight:600;color:var(--warn)">0</div>
+        </div>
+        <div class="metric" style="text-align:center;padding:6px">
+          <div class="metric-label">Atrasadas</div>
+          <div style="font-size:18px;font-weight:600;color:var(--danger)">1</div>
+        </div>
+      </div>
+      <div style="font-size:12px;color:var(--text2);margin-bottom:4px">Horas: 95h realizadas / 80h previstas (100%)</div>
+      <div class="pbar" style="margin-bottom:10px"><div class="pbar-fill" style="width:100%;background:var(--warn)"></div></div>
+      <div style="font-size:12px;color:var(--text2)">Projetos: Sistema MES</div>
+      <hr class="divider">
+      <button class="btn btn-sm" onclick="document.getElementById(&#39;f-prog&#39;).value=&#39;P4&#39;;setPage(&#39;atividades&#39;)">Ver Atividades →</button>
+    </div><div class="team-card">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+        <div class="avatar" style="width:44px;height:44px;font-size:15px;background:#CECBF6;color:#333">LF</div>
+        <div>
+          <div style="font-weight:600;font-size:15px">Lucas Ferreira</div>
+          <div style="margin-top:3px"><span class="badge b-ti">TI</span></div>
+        </div>
+      </div>
+      <div class="grid3" style="margin-bottom:10px">
+        <div class="metric" style="text-align:center;padding:6px">
+          <div class="metric-label">Concluídas</div>
+          <div style="font-size:18px;font-weight:600;color:var(--success)">0</div>
+        </div>
+        <div class="metric" style="text-align:center;padding:6px">
+          <div class="metric-label">Em andamento</div>
+          <div style="font-size:18px;font-weight:600;color:var(--warn)">2</div>
+        </div>
+        <div class="metric" style="text-align:center;padding:6px">
+          <div class="metric-label">Atrasadas</div>
+          <div style="font-size:18px;font-weight:600;color:var(--danger)">0</div>
+        </div>
+      </div>
+      <div style="font-size:12px;color:var(--text2);margin-bottom:4px">Horas: 60h realizadas / 104h previstas (58%)</div>
+      <div class="pbar" style="margin-bottom:10px"><div class="pbar-fill" style="width:58%;background:var(--success)"></div></div>
+      <div style="font-size:12px;color:var(--text2)">Projetos: ERP Integração, Portal do Cliente</div>
+      <hr class="divider">
+      <button class="btn btn-sm" onclick="document.getElementById(&#39;f-prog&#39;).value=&#39;P5&#39;;setPage(&#39;atividades&#39;)">Ver Atividades →</button>
+    </div><div class="team-card">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+        <div class="avatar" style="width:44px;height:44px;font-size:15px;background:#F4C0D1;color:#333">DA</div>
+        <div>
+          <div style="font-weight:600;font-size:15px">Diego Almeida</div>
+          <div style="margin-top:3px"><span class="badge b-both">Automação + TI</span></div>
+        </div>
+      </div>
+      <div class="grid3" style="margin-bottom:10px">
+        <div class="metric" style="text-align:center;padding:6px">
+          <div class="metric-label">Concluídas</div>
+          <div style="font-size:18px;font-weight:600;color:var(--success)">0</div>
+        </div>
+        <div class="metric" style="text-align:center;padding:6px">
+          <div class="metric-label">Em andamento</div>
+          <div style="font-size:18px;font-weight:600;color:var(--warn)">2</div>
+        </div>
+        <div class="metric" style="text-align:center;padding:6px">
+          <div class="metric-label">Atrasadas</div>
+          <div style="font-size:18px;font-weight:600;color:var(--danger)">0</div>
+        </div>
+      </div>
+      <div style="font-size:12px;color:var(--text2);margin-bottom:4px">Horas: 45h realizadas / 104h previstas (43%)</div>
+      <div class="pbar" style="margin-bottom:10px"><div class="pbar-fill" style="width:43%;background:var(--success)"></div></div>
+      <div style="font-size:12px;color:var(--text2)">Projetos: SCADA Refinaria, ERP Integração</div>
+      <hr class="divider">
+      <button class="btn btn-sm" onclick="document.getElementById(&#39;f-prog&#39;).value=&#39;P6&#39;;setPage(&#39;atividades&#39;)">Ver Atividades →</button>
+    </div><div class="team-card">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+        <div class="avatar" style="width:44px;height:44px;font-size:15px;background:#b4f4f3;color:#333">J</div>
+        <div>
+          <div style="font-weight:600;font-size:15px">João</div>
+          <div style="margin-top:3px"><span class="badge b-ai">Automação</span></div>
+        </div>
+      </div>
+      <div class="grid3" style="margin-bottom:10px">
+        <div class="metric" style="text-align:center;padding:6px">
+          <div class="metric-label">Concluídas</div>
+          <div style="font-size:18px;font-weight:600;color:var(--success)">0</div>
+        </div>
+        <div class="metric" style="text-align:center;padding:6px">
+          <div class="metric-label">Em andamento</div>
+          <div style="font-size:18px;font-weight:600;color:var(--warn)">0</div>
+        </div>
+        <div class="metric" style="text-align:center;padding:6px">
+          <div class="metric-label">Atrasadas</div>
+          <div style="font-size:18px;font-weight:600;color:var(--danger)">0</div>
+        </div>
+      </div>
+      <div style="font-size:12px;color:var(--text2);margin-bottom:4px">Horas: 0h realizadas / 0h previstas (0%)</div>
+      <div class="pbar" style="margin-bottom:10px"><div class="pbar-fill" style="width:0%;background:var(--success)"></div></div>
+      <div style="font-size:12px;color:var(--text2)">Projetos: —</div>
+      <hr class="divider">
+      <button class="btn btn-sm" onclick="document.getElementById(&#39;f-prog&#39;).value=&#39;P7&#39;;setPage(&#39;atividades&#39;)">Ver Atividades →</button>
+    </div></div>
 </div>
 
 <!-- ===== CONFIGURAÇÕES ===== -->
@@ -307,15 +907,84 @@
   <div class="grid2">
     <div class="card">
       <div style="font-size:13px;font-weight:600;margin-bottom:12px;">Programadores</div>
-      <div id="cfg-progs"></div>
+      <div id="cfg-progs">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:0.5px solid var(--border)">
+      <div style="display:flex;align-items:center;gap:8px">
+        <span class="avatar" style="background:#B5D4F4;color:#333;width:26px;height:26px;font-size:10px">CS</span>
+        <div><div style="font-size:13px">Carlos Silva</div><div style="font-size:11px;color:var(--text2)">Automação Industrial</div></div>
+      </div>
+      <button class="btn btn-sm btn-danger" onclick="deletarProgramador(&#39;P1&#39;)">✕</button>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:0.5px solid var(--border)">
+      <div style="display:flex;align-items:center;gap:8px">
+        <span class="avatar" style="background:#9FE1CB;color:#333;width:26px;height:26px;font-size:10px">MO</span>
+        <div><div style="font-size:13px">Marcos Oliveira</div><div style="font-size:11px;color:var(--text2)">Automação Industrial</div></div>
+      </div>
+      <button class="btn btn-sm btn-danger" onclick="deletarProgramador(&#39;P2&#39;)">✕</button>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:0.5px solid var(--border)">
+      <div style="display:flex;align-items:center;gap:8px">
+        <span class="avatar" style="background:#F5C4B3;color:#333;width:26px;height:26px;font-size:10px">RS</span>
+        <div><div style="font-size:13px">Rafael Santos</div><div style="font-size:11px;color:var(--text2)">Automação Industrial</div></div>
+      </div>
+      <button class="btn btn-sm btn-danger" onclick="deletarProgramador(&#39;P3&#39;)">✕</button>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:0.5px solid var(--border)">
+      <div style="display:flex;align-items:center;gap:8px">
+        <span class="avatar" style="background:#FAC775;color:#333;width:26px;height:26px;font-size:10px">EC</span>
+        <div><div style="font-size:13px">Eduardo Costa</div><div style="font-size:11px;color:var(--text2)">Automação Industrial</div></div>
+      </div>
+      <button class="btn btn-sm btn-danger" onclick="deletarProgramador(&#39;P4&#39;)">✕</button>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:0.5px solid var(--border)">
+      <div style="display:flex;align-items:center;gap:8px">
+        <span class="avatar" style="background:#CECBF6;color:#333;width:26px;height:26px;font-size:10px">LF</span>
+        <div><div style="font-size:13px">Lucas Ferreira</div><div style="font-size:11px;color:var(--text2)">TI</div></div>
+      </div>
+      <button class="btn btn-sm btn-danger" onclick="deletarProgramador(&#39;P5&#39;)">✕</button>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:0.5px solid var(--border)">
+      <div style="display:flex;align-items:center;gap:8px">
+        <span class="avatar" style="background:#F4C0D1;color:#333;width:26px;height:26px;font-size:10px">DA</span>
+        <div><div style="font-size:13px">Diego Almeida</div><div style="font-size:11px;color:var(--text2)">Automação + TI</div></div>
+      </div>
+      <button class="btn btn-sm btn-danger" onclick="deletarProgramador(&#39;P6&#39;)">✕</button>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:0.5px solid var(--border)">
+      <div style="display:flex;align-items:center;gap:8px">
+        <span class="avatar" style="background:#b4f4f3;color:#333;width:26px;height:26px;font-size:10px">J</span>
+        <div><div style="font-size:13px">João</div><div style="font-size:11px;color:var(--text2)">Automação Industrial</div></div>
+      </div>
+      <button class="btn btn-sm btn-danger" onclick="deletarProgramador(&#39;P7&#39;)">✕</button>
+    </div></div>
       <hr class="divider">
-      <button class="btn btn-sm btn-primary" onclick="openModal('add-prog')">+ Novo Programador</button>
+      <button class="btn btn-sm btn-primary" onclick="openModal(&#39;add-prog&#39;)">+ Novo Programador</button>
     </div>
     <div class="card">
       <div style="font-size:13px;font-weight:600;margin-bottom:12px;">Clientes</div>
-      <div id="cfg-clis"></div>
+      <div id="cfg-clis">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:0.5px solid var(--border)">
+      <div><div style="font-size:13px">Metalúrgica Aço Forte</div><div style="font-size:11px;color:var(--text2)">Metalurgia</div></div>
+      <button class="btn btn-sm btn-danger" onclick="deletarCliente(&#39;C1&#39;)">✕</button>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:0.5px solid var(--border)">
+      <div><div style="font-size:13px">Petroquímica Nordeste</div><div style="font-size:11px;color:var(--text2)">Petroquímica</div></div>
+      <button class="btn btn-sm btn-danger" onclick="deletarCliente(&#39;C2&#39;)">✕</button>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:0.5px solid var(--border)">
+      <div><div style="font-size:13px">Indústria Têxtil Sul</div><div style="font-size:11px;color:var(--text2)">Têxtil</div></div>
+      <button class="btn btn-sm btn-danger" onclick="deletarCliente(&#39;C3&#39;)">✕</button>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:0.5px solid var(--border)">
+      <div><div style="font-size:13px">LogTech Soluções</div><div style="font-size:11px;color:var(--text2)">Tecnologia</div></div>
+      <button class="btn btn-sm btn-danger" onclick="deletarCliente(&#39;C4&#39;)">✕</button>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:0.5px solid var(--border)">
+      <div><div style="font-size:13px">Alimentos Vitória</div><div style="font-size:11px;color:var(--text2)">Alimentos</div></div>
+      <button class="btn btn-sm btn-danger" onclick="deletarCliente(&#39;C5&#39;)">✕</button>
+    </div></div>
       <hr class="divider">
-      <button class="btn btn-sm btn-primary" onclick="openModal('add-cli')">+ Novo Cliente</button>
+      <button class="btn btn-sm btn-primary" onclick="openModal(&#39;add-cli&#39;)">+ Novo Cliente</button>
     </div>
   </div>
   <div class="card" style="margin-top:0">
@@ -323,7 +992,7 @@
     <div style="display:flex;gap:8px;flex-wrap:wrap;">
       <button class="btn btn-sm" onclick="exportarDados()">📤 Exportar JSON</button>
       <label class="btn btn-sm" style="cursor:pointer">📥 Importar JSON<input type="file" accept=".json" style="display:none" onchange="importarDados(event)"></label>
-      <button class="btn btn-sm btn-danger" onclick="if(confirm('Apagar todos os dados?')) { localStorage.clear(); location.reload(); }">🗑 Limpar Tudo</button>
+      <button class="btn btn-sm btn-danger" onclick="if(confirm(&#39;Apagar todos os dados?&#39;)) { localStorage.clear(); location.reload(); }">🗑 Limpar Tudo</button>
     </div>
   </div>
 </div>
@@ -338,14 +1007,14 @@
   <div class="modal">
     <div class="modal-head">
       <div class="modal-title" id="modal-add-title">Nova Atividade</div>
-      <button class="modal-close" onclick="closeModal('add')">✕</button>
+      <button class="modal-close" onclick="closeModal(&#39;add&#39;)">✕</button>
     </div>
     <div class="form-grid">
       <input type="hidden" id="f-id">
       <div class="field"><label>Descrição *</label><input type="text" id="f-desc" placeholder="Ex: Programação CLP S7-1200"></div>
       <div class="form-row2">
-        <div class="field"><label>Programador *</label><select id="f-prog-sel"><option value="">Selecione</option></select></div>
-        <div class="field"><label>Projeto *</label><select id="f-proj-sel"><option value="">Selecione</option></select></div>
+        <div class="field"><label>Programador *</label><select id="f-prog-sel"><option value="">Selecione</option><option value="P1">Carlos Silva</option><option value="P2">Marcos Oliveira</option><option value="P3">Rafael Santos</option><option value="P4">Eduardo Costa</option><option value="P5">Lucas Ferreira</option><option value="P6">Diego Almeida</option><option value="P7">João</option></select></div>
+        <div class="field"><label>Projeto *</label><select id="f-proj-sel"><option value="">Selecione</option><option value="PRJ01">Automação Linha 3</option><option value="PRJ02">SCADA Refinaria</option><option value="PRJ03">Sistema MES</option><option value="PRJ04">ERP Integração</option><option value="PRJ05">Portal do Cliente</option><option value="PRJ06">Supervisório CLP</option></select></div>
       </div>
       <div class="form-row3">
         <div class="field"><label>Início Previsto</label><input type="date" id="f-inicio"></div>
@@ -363,7 +1032,7 @@
       <div class="field"><label>Observações</label><textarea id="f-obs" rows="2" style="width:100%;font-size:13px;padding:8px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);font-family:inherit;resize:vertical"></textarea></div>
     </div>
     <div class="modal-footer">
-      <button class="btn" onclick="closeModal('add')">Cancelar</button>
+      <button class="btn" onclick="closeModal(&#39;add&#39;)">Cancelar</button>
       <button class="btn btn-primary" onclick="salvarAtividade()">Salvar</button>
     </div>
   </div>
@@ -374,19 +1043,40 @@
   <div class="modal">
     <div class="modal-head">
       <div class="modal-title" id="modal-proj-title">Novo Projeto</div>
-      <button class="modal-close" onclick="closeModal('add-proj')">✕</button>
+      <button class="modal-close" onclick="closeModal(&#39;add-proj&#39;)">✕</button>
     </div>
     <div class="form-grid">
       <input type="hidden" id="fp-id">
       <div class="field"><label>Nome do Projeto *</label><input type="text" id="fp-nome" placeholder="Ex: Automação Linha 4"></div>
       <div class="form-row2">
-        <div class="field"><label>Cliente *</label><select id="fp-cli-sel"><option value="">Selecione</option></select></div>
+        <div class="field"><label>Cliente *</label><select id="fp-cli-sel"><option value="">Selecione</option><option value="C1">Metalúrgica Aço Forte</option><option value="C2">Petroquímica Nordeste</option><option value="C3">Indústria Têxtil Sul</option><option value="C4">LogTech Soluções</option><option value="C5">Alimentos Vitória</option></select></div>
         <div class="field"><label>Área *</label>
           <select id="fp-area-sel"><option value="">Selecione</option><option>Automação Industrial</option><option>TI</option></select>
         </div>
       </div>
       <div class="field"><label>Programadores Alocados</label>
-        <div id="fp-progs-checks" style="display:flex;flex-wrap:wrap;gap:8px;padding:8px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);background:var(--bg2)"></div>
+        <div id="fp-progs-checks" style="display:flex;flex-wrap:wrap;gap:8px;padding:8px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);background:var(--bg2)">
+    <label style="display:flex;align-items:center;gap:4px;font-size:12px;cursor:pointer">
+      <input type="checkbox" value="P1" style="cursor:pointer"> Carlos Silva
+    </label>
+    <label style="display:flex;align-items:center;gap:4px;font-size:12px;cursor:pointer">
+      <input type="checkbox" value="P2" style="cursor:pointer"> Marcos Oliveira
+    </label>
+    <label style="display:flex;align-items:center;gap:4px;font-size:12px;cursor:pointer">
+      <input type="checkbox" value="P3" style="cursor:pointer"> Rafael Santos
+    </label>
+    <label style="display:flex;align-items:center;gap:4px;font-size:12px;cursor:pointer">
+      <input type="checkbox" value="P4" style="cursor:pointer"> Eduardo Costa
+    </label>
+    <label style="display:flex;align-items:center;gap:4px;font-size:12px;cursor:pointer">
+      <input type="checkbox" value="P5" style="cursor:pointer"> Lucas Ferreira
+    </label>
+    <label style="display:flex;align-items:center;gap:4px;font-size:12px;cursor:pointer">
+      <input type="checkbox" value="P6" style="cursor:pointer"> Diego Almeida
+    </label>
+    <label style="display:flex;align-items:center;gap:4px;font-size:12px;cursor:pointer">
+      <input type="checkbox" value="P7" style="cursor:pointer"> João
+    </label></div>
       </div>
       <div class="form-row2">
         <div class="field"><label>Data de Início</label><input type="date" id="fp-inicio"></div>
@@ -394,7 +1084,7 @@
       </div>
     </div>
     <div class="modal-footer">
-      <button class="btn" onclick="closeModal('add-proj')">Cancelar</button>
+      <button class="btn" onclick="closeModal(&#39;add-proj&#39;)">Cancelar</button>
       <button class="btn btn-primary" onclick="salvarProjeto()">Salvar</button>
     </div>
   </div>
@@ -405,7 +1095,7 @@
   <div class="modal" style="max-width:400px">
     <div class="modal-head">
       <div class="modal-title">Novo Programador</div>
-      <button class="modal-close" onclick="closeModal('add-prog')">✕</button>
+      <button class="modal-close" onclick="closeModal(&#39;add-prog&#39;)">✕</button>
     </div>
     <div class="form-grid">
       <div class="field"><label>Nome Completo *</label><input type="text" id="np-nome" placeholder="Ex: João Souza"></div>
@@ -419,7 +1109,7 @@
       <div class="field"><label>Cor do Avatar</label><input type="color" id="np-cor" value="#B5D4F4" style="height:36px;padding:2px;cursor:pointer"></div>
     </div>
     <div class="modal-footer">
-      <button class="btn" onclick="closeModal('add-prog')">Cancelar</button>
+      <button class="btn" onclick="closeModal(&#39;add-prog&#39;)">Cancelar</button>
       <button class="btn btn-primary" onclick="salvarProgramador()">Salvar</button>
     </div>
   </div>
@@ -430,14 +1120,14 @@
   <div class="modal" style="max-width:400px">
     <div class="modal-head">
       <div class="modal-title">Novo Cliente</div>
-      <button class="modal-close" onclick="closeModal('add-cli')">✕</button>
+      <button class="modal-close" onclick="closeModal(&#39;add-cli&#39;)">✕</button>
     </div>
     <div class="form-grid">
       <div class="field"><label>Nome do Cliente *</label><input type="text" id="nc-nome" placeholder="Ex: Empresa XYZ Ltda"></div>
       <div class="field"><label>Setor</label><input type="text" id="nc-setor" placeholder="Ex: Metalurgia, Alimentos..."></div>
     </div>
     <div class="modal-footer">
-      <button class="btn" onclick="closeModal('add-cli')">Cancelar</button>
+      <button class="btn" onclick="closeModal(&#39;add-cli&#39;)">Cancelar</button>
       <button class="btn btn-primary" onclick="salvarCliente()">Salvar</button>
     </div>
   </div>
@@ -1118,5 +1808,6 @@ renderDashboard();
 document.getElementById('dash-date').textContent =
   new Date().toLocaleDateString('pt-BR',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
 </script>
-</body>
-</html>
+
+
+</body></html>
